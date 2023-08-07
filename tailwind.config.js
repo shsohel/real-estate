@@ -1,18 +1,48 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ['class'],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './app/**/*.{js,jsx}',
+    './src/**/*.{js,jsx}',
   ],
+  darkMode: 'class',
+
   theme: {
+    screens: {
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+      xxl: '1400px',
+    },
+    container: {
+      center: true,
+      padding: '1rem',
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        primary: '#0ec6d5',
+        secondary: '#1e1d85',
+        success: '#28a745',
+        info: '#17a2b8',
+        warning: '#f6b500',
+        danger: '#dc3545',
+        light: '#f8f9fa',
+        dark: '#252525',
+        // gray: '#696969',
       },
     },
+    fontFamily: {
+      satisfy: 'Satisfy, sans-serif',
+      acme: 'Acme, cursive',
+    },
   },
-  plugins: [],
-}
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
+};
