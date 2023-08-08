@@ -8,9 +8,8 @@ import 'swiper/css';
 import 'swiper/css/bundle';
 import destinationImage from '@/images/properties-city-01.jpg';
 
-import apartment from '@/images/icons/apppartement.png';
-import { propertiesTypes } from '@/data';
 import Image from 'next/image';
+import { propertyCities } from '@/data';
 
 const Slider = (props) => {
   const { slidesView, navigation = false } = props;
@@ -50,23 +49,25 @@ const Slider = (props) => {
       style={{}}
       // breakpoints={sliderSettings}
     >
-      {[2, 5, 5, 5, 5, 7].map((type, index) => {
+      {propertyCities.map((city, index) => {
         return (
           <SwiperSlide key={index}>
-            <div className=" overflow-hidden max-w-[280px] relative bg-black">
+            <div
+              className={`overflow-hidden max-w-[280px] relative bg-black animate__animated animate__fadeInUp animate__delay-${index}s`}
+            >
               <Image
                 className="hover:scale-125 hover:opacity-75 transition duration-700 cursor-pointer  object-cover  hover:rounded"
-                src={destinationImage?.src}
+                src={city?.image}
                 alt="City 01"
                 width={280}
                 height={272}
               />
               <div className="absolute bottom-4 right-0 left-0 max-w-[250px] px-3">
-                <h2 className="text-lg font-medium">New York</h2>
+                <h2 className="text-lg font-medium">{city.city}</h2>
                 <p className="text-sm">
                   From
                   <span className="text-sm font-medium pl-1">
-                    $522220 - $655444
+                    {`$${city.startCost} - $${city.endCost}`}
                   </span>
                 </p>
               </div>
@@ -85,12 +86,12 @@ const DestinationSlider = (props) => {
     <div>
       <div className=" grid-cols-4 hidden lg:grid xl:hidden my-4 gap-2">
         <div className=" col-span-4 ">
-          <Slider slidesView={3} navigation={true} />
+          <Slider slidesView={4} navigation={true} />
         </div>
       </div>
-      <div className=" grid-cols-4 hidden xl:grid my-4 gap-2">
-        <div className=" col-span-4 ">
-          <Slider slidesView={4} navigation={true} />
+      <div className=" grid-cols-5 hidden xl:grid my-4 gap-2">
+        <div className=" col-span-5 ">
+          <Slider slidesView={5} navigation={true} />
         </div>
       </div>
       <div className=" grid-cols-2 hidden md:grid lg:hidden my-4 gap-2">

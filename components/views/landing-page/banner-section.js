@@ -1,5 +1,5 @@
 import React from 'react';
-import homepageImage from '../../images/bg-home-01.jpg';
+import homepageImage from '@/images/bg-home-01.jpg';
 import FilterSection from './filter-section';
 
 const BannerSection = () => {

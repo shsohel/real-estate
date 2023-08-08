@@ -3,6 +3,11 @@ import apartment from '@/images/icons/apppartement.png';
 import house from '@/images/icons/sofa.png';
 import vila from '@/images/icons/eco-house.png';
 import office from '@/images/icons/architecture-and-city.png';
+import city01 from '@/images/properties-city-01.jpg';
+import city02 from '@/images/properties-city-02.jpg';
+import city03 from '@/images/properties-city-03.jpg';
+import city04 from '@/images/properties-city-04.jpg';
+import city05 from '@/images/properties-city-05.jpg';
 
 export const properties = [
   {
@@ -211,5 +216,43 @@ export const propertiesTypes = [
     iconFor: 'Office',
     url: '/listings',
     icon: `${office?.src}`,
+  },
+];
+
+export const propertyCities = [
+  {
+    id: 1,
+    city: 'New York',
+    startCost: 540.0,
+    endCost: 900.0,
+    image: `${city01?.src}`,
+  },
+  {
+    id: 2,
+    city: 'Los Angeles',
+    startCost: 520.0,
+    endCost: 700.0,
+    image: `${city02?.src}`,
+  },
+  {
+    id: 3,
+    city: 'San Francisco',
+    startCost: 340.0,
+    endCost: 600.0,
+    image: `${city03?.src}`,
+  },
+  {
+    id: 4,
+    city: 'San Jose',
+    startCost: 440.0,
+    endCost: 1000.0,
+    image: `${city04?.src}`,
+  },
+  {
+    id: 5,
+    city: 'Kansas City',
+    startCost: 540.0,
+    endCost: 9600.0,
+    image: `${city05?.src}`,
   },
 ];

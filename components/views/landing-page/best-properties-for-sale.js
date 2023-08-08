@@ -1,16 +1,16 @@
 import React from 'react';
-import { Button } from '../ui/button';
 import { ArrowLongRightIcon } from '@heroicons/react/24/outline';
 
-import Slider from '../customs/slider';
 import { properties } from '@/data';
-const BestPropertiesForRent = () => {
+import { Button } from '@/components/ui/button';
+import Slider from '@/components/customs/slider';
+const BestPropertiesForSale = () => {
   return (
     <div className="my-32  container">
       <div className="grid grid-cols-1 md:grid-cols-2 place-content-between text-dark mb-3">
         <div>
           <h2 className="text-3xl font-medium mb-4">
-            Best Properties For Rent
+            Best Properties For Sale
           </h2>
           <div className="border-b-[3px] border-primary border-spacing-1 w-20"></div>
           <p className="text-gray-400 text-sm font-medium my-3">
@@ -35,4 +35,4 @@ const BestPropertiesForRent = () => {
   );
 };
 
-export default BestPropertiesForRent;
+export default BestPropertiesForSale;

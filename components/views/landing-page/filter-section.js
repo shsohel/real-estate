@@ -1,17 +1,13 @@
 import {
-  HomeIcon,
   HomeModernIcon,
-  MagnifyingGlassCircleIcon,
   MagnifyingGlassIcon,
   PlusCircleIcon,
 } from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
-import { Button } from '../ui/button';
 import { Home } from 'lucide-react';
-import ComboBox from '../customs/combo-box';
-import OptionSelect from '../customs/option';
-import Select from 'react-select';
-import RangeSlider from '../customs/range-slider';
+import { Button } from '@/components/ui/button';
+import OptionSelect from '@/components/customs/option';
+import RangeSlider from '@/components/customs/range-slider';
 const options = [
   { id: 1, label: 'Wade Cooper' },
   { id: 2, label: 'Arlene Mccoy' },

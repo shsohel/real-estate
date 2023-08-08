@@ -1,9 +1,7 @@
 import React from 'react';
-import { Button } from '../ui/button';
 import { ArrowLongRightIcon } from '@heroicons/react/20/solid';
-import PropertyTypeSlider from '../customs/property-types-slider';
-import apartment from '@/images/icons/apppartement.png';
-import CSlider from '../customs/property-types-slider';
+import { Button } from '@/components/ui/button';
+import CSlider from '@/components/customs/property-types-slider';
 
 const ExplorePropertyTypes = () => {
   return (

@@ -1,12 +1,7 @@
 import React from 'react';
-import { Button } from '../ui/button';
-import { ArrowLongRightIcon } from '@heroicons/react/24/outline';
 
-import Slider from '../customs/slider';
 import { properties } from '@/data';
-
-import Image from 'next/image';
-import DestinationSlider from '../customs/destination-slider';
+import DestinationSlider from '@/components/customs/destination-slider';
 
 const DestinationsSection = () => {
   return (
