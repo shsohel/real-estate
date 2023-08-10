@@ -9,6 +9,14 @@ import city03 from '@/images/properties-city-03.jpg';
 import city04 from '@/images/properties-city-04.jpg';
 import city05 from '@/images/properties-city-05.jpg';
 
+import partner01 from '@/images/partner-1.png';
+import partner04 from '@/images/partner-4.png';
+import partner03 from '@/images/partner-3.png';
+import partner05 from '@/images/partner-5.png';
+import partner02 from '@/images/partner-2.png';
+import partner06 from '@/images/partner-6.png';
+import partner07 from '@/images/partner-6.png';
+
 export const properties = [
   {
     id: 1,
@@ -254,5 +262,49 @@ export const propertyCities = [
     startCost: 540.0,
     endCost: 9600.0,
     image: `${city05?.src}`,
+  },
+];
+export const partnerData = [
+  {
+    id: 1,
+    link: '',
+
+    image: `${partner01?.src}`,
+  },
+  {
+    id: 2,
+
+    link: '',
+    image: `${partner02?.src}`,
+  },
+  {
+    id: 3,
+
+    link: '',
+    image: `${partner03?.src}`,
+  },
+  {
+    id: 4,
+
+    link: '',
+    image: `${partner04?.src}`,
+  },
+  {
+    id: 5,
+
+    link: '',
+    image: `${partner05?.src}`,
+  },
+  {
+    id: 6,
+
+    link: '',
+    image: `${partner06?.src}`,
+  },
+  {
+    id: 7,
+
+    link: '',
+    image: `${partner07?.src}`,
   },
 ];

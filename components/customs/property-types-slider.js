@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/bundle';
 
-import apartment from '@/images/icons/apppartement.png';
 import { propertiesTypes } from '@/data';
 
 const PropertyTypeSlider = (props) => {
@@ -51,7 +50,7 @@ const PropertyTypeSlider = (props) => {
       {propertiesTypes.map((type, index) => {
         return (
           <SwiperSlide key={index}>
-            <div className="col-span-1">
+            <div className="">
               <div className="hover:shadow-md rounded-sm w-[190px] h-[190px] flex flex-col justify-center items-center p-5">
                 <div
                   className="w-[80px] h-[80px] p-2"
@@ -74,8 +73,7 @@ const PropertyTypeSlider = (props) => {
     </Swiper>
   );
 };
-const CSlider = (props) => {
-  const { products } = props;
+const CSlider = () => {
   return (
     <div>
       <div className=" grid-cols-4 hidden lg:grid xl:hidden my-4 gap-2">
