@@ -30,6 +30,7 @@ module.exports = {
         warning: '#f6b500',
         danger: '#dc3545',
         light: '#f8f9fa',
+        'txt-mute': '#ababab',
         dark: '#252525',
         // gray: '#696969',
       },

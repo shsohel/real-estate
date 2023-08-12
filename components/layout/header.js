@@ -4,7 +4,7 @@ import { Bars3Icon, HeartIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { BellIcon } from '@radix-ui/react-icons';
 import { NavMenu, NavigationMenuDemo } from '../customs/nav-menu';
 import Image from 'next/image';
-import logo from '../../images/logo-white.png';
+import logo from '@/images/logo-white.png';
 import { SelectOption } from '../customs/select-option';
 import { Heart, HeartPulseIcon } from 'lucide-react';
 
