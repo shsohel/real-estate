@@ -5,7 +5,7 @@ import FilterSection from './filter-section';
 const BannerSection = () => {
   return (
     <div
-      className="min-h-screen  text-white grid grid-flow-col justify-stretch items-center"
+      className="min-h-screen  text-white grid grid-flow-col justify-stretch items-center "
       style={{
         backgroundImage: `url(${homepageImage?.src})`,
         backgroundPosition: 'center center',

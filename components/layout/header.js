@@ -5,26 +5,50 @@ import { BellIcon } from '@radix-ui/react-icons';
 import { NavMenu, NavigationMenuDemo } from '../customs/nav-menu';
 import Image from 'next/image';
 import logo from '@/images/logo-white.png';
+import logo2 from '@/images/logo.png';
 import { SelectOption } from '../customs/select-option';
 import { Heart, HeartPulseIcon } from 'lucide-react';
+import Head from 'next/head';
 
-const Header = () => {
+const Header = ({ title, show }) => {
   return (
     <Disclosure as="nav">
       {({ open }) => (
         <>
-          <div className="mx-auto px-4 sm:px-6 lg:px-24 py-2 bg-none fixed z-50 w-full border ">
+          <Head>
+            <title>{title}</title>
+            <meta name="description" content="Hire a Front-End Developer" />
+            <meta
+              name="description"
+              content="Front-End Developer, React Developer, Javascript Developer, UI DESIGNER"
+            />
+
+            <link rel="icon" href="/favicon.ico" />
+
+            {/* <title>Your Title Goes Here</title>
+          <meta name="description" content="Your description goes here"/>
+
+          <img src="url" alt="Your image description goes here"></img>
+          <meta name="og:title" property="og:title" content="Your Open Graph Title Goes Here"></meta>
+          <meta name="robots" content="index, follow"></meta>
+          <link href="URL" rel="canonical"></link> */}
+          </Head>
+          <div
+            className={`mx-auto px-4 sm:px-6 lg:px-24 py-2 bg-none fixed  z-50 w-full transition-all duration-1000 ${
+              show && 'bg-white text-dark shadow-2xl '
+            }`}
+          >
             <div className="flex justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0 flex items-center">
                   <Image
                     className="block lg:hidden h-8 w-auto"
-                    src={logo}
+                    src={show ? logo2 : logo}
                     alt="Workflow"
                   />
                   <Image
                     className="hidden lg:block h-8 w-auto"
-                    src={logo}
+                    src={show ? logo2 : logo}
                     alt="Workflow"
                   />
                 </div>
@@ -33,14 +57,14 @@ const Header = () => {
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center ">
-                <div className="divide-x text-white flex items-center">
+                <div className="divide-x  flex items-center">
                   <SelectOption />
                   <div>
                     <button className="ml-3 uppercase text-sm">Sign In</button>
                   </div>
                 </div>
                 <div className="mx-4">
-                  <button className="relative text-white">
+                  <button className="relative ">
                     <Heart className="" size={24} />
                     <span className="absolute -right-2 -top-1 h-4 w-4 rounded-full  bg-primary  text-center text-xs text-white dark:border-white ">
                       2
@@ -48,7 +72,7 @@ const Header = () => {
                   </button>
                 </div>
                 <div className="mx-4 border py-3 px-6 rounded hover:bg-primary hover:border-0">
-                  <button className="relative text-white ">Add Listing</button>
+                  <button className="relative  ">Add Listing</button>
                 </div>
               </div>
               <div className="-mr-2 flex items-center sm:hidden">

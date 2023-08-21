@@ -3,7 +3,10 @@ import Header from './header';
 import Footer from './footer';
 import { ArrowBigUpIcon, ArrowUpIcon } from 'lucide-react';
 
-const Layouts = ({ children }) => {
+const Layouts = ({ title = 'Real State', children }) => {
+  const [show, setShow] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const [visible, setVisible] = useState(false);
   const backTop = () => {
     window.scroll({ behavior: 'smooth', top: 0 });
@@ -29,9 +32,35 @@ const Layouts = ({ children }) => {
     };
   }, []);
 
+  const controlNavbar = () => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > 0) {
+        // if scroll down hide the navbar
+        setShow(true);
+      } else {
+        // if scroll up show the navbar
+        setShow(false);
+      }
+
+      // remember current page location to use in the next move
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
+
   return (
     <div>
-      <Header />
+      <Header title={title} show={show} />
       <main>{children}</main>
       <Footer />
       {visible && (

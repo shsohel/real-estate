@@ -57,7 +57,7 @@ export function NavMenu() {
             key={menuIndex}
             className="group relative cursor-pointer py-1   "
           >
-            <div className="flex items-center justify-between  px-2 hover:border-b-2 border-primary text-white">
+            <div className="flex items-center justify-between  px-2 hover:border-b-2 border-primary ">
               <a className="menu-hover  p-1 text-sm font-normal ">
                 {menu.name}
               </a>

@@ -1,4 +1,7 @@
 import grid01 from '@/images/properties-grid-18.jpg';
+import grid02 from '@/images/properties-grid-02.jpg';
+import grid03 from '@/images/properties-grid-03.jpg';
+import grid04 from '@/images/properties-grid-04.jpg';
 import apartment from '@/images/icons/apppartement.png';
 import house from '@/images/icons/sofa.png';
 import vila from '@/images/icons/eco-house.png';
@@ -100,12 +103,12 @@ export const properties = [
     images: [
       {
         id: 1,
-        src: `${grid01?.src}`,
+        src: `${grid02?.src}`,
         default: true,
       },
       {
         id: 2,
-        src: `${grid01?.src}`,
+        src: `${grid02?.src}`,
         default: false,
       },
     ],
@@ -146,12 +149,12 @@ export const properties = [
     images: [
       {
         id: 1,
-        src: `${grid01?.src}`,
+        src: `${grid03?.src}`,
         default: true,
       },
       {
         id: 2,
-        src: `${grid01?.src}`,
+        src: `${grid03?.src}`,
         default: false,
       },
     ],
@@ -192,12 +195,12 @@ export const properties = [
     images: [
       {
         id: 1,
-        src: `${grid01?.src}`,
+        src: `${grid04?.src}`,
         default: true,
       },
       {
         id: 2,
-        src: `${grid01?.src}`,
+        src: `${grid04?.src}`,
         default: false,
       },
     ],
