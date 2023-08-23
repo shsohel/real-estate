@@ -34,7 +34,7 @@ const FilterSection = () => {
   return (
     <div className="text-gray-500">
       <div>
-        <Button className="bg-secondary py-6 rounded uppercase">
+        <Button className="bg-secondary py-6 rounded uppercase text-white">
           <Home className="mr-2 h-4 w-4" /> For Sale
         </Button>
         <Button className="bg-white text-secondary py-6 rounded">

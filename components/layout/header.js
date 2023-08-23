@@ -9,8 +9,14 @@ import logo2 from '@/images/logo.png';
 import { SelectOption } from '../customs/select-option';
 import { Heart, HeartPulseIcon } from 'lucide-react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const Header = ({ title, show }) => {
+  const router = useRouter();
+
+  const handleAddListing = () => {
+    router.push('/dashboard/add-listing');
+  };
   return (
     <Disclosure as="nav">
       {({ open }) => (

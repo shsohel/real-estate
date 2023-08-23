@@ -29,7 +29,7 @@ export default function DashboardLayout(props) {
 
   return (
     <>
-      <div className="min-h-full text-dark">
+      <div className="min-h-screen text-dark bg-[#f8f8f8]">
         <Header onSidebar={onSidebar} sidebarOpen={sidebarOpen} />
 
         {/* Main column */}
@@ -70,7 +70,7 @@ export default function DashboardLayout(props) {
             </div>
           </div>
           <main className="flex-1" hidden={isComponentLoading}>
-            <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+            <div className="border-b bg-white border-gray-200 px-4 py-6 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
               <div className="min-w-0 flex-1">
                 <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">
                   {title}

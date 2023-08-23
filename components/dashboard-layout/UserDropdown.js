@@ -7,6 +7,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
+import userAvatar from '@/images/agent-16.jpg';
+
 const UserDropdown = () => {
   const handleLogout = () => {};
 
@@ -18,20 +20,18 @@ const UserDropdown = () => {
             <span className="flex w-full items-center justify-between">
               <span className="flex min-w-0 items-center justify-between space-x-3">
                 <Image
-                  className="h-14 w-14 flex-shrink-0 rounded-full bg-gray-300"
-                  src=""
+                  className=" flex-shrink-0 rounded-full bg-gray-300"
+                  src={userAvatar}
                   alt=""
-                  width={20}
-                  height={20}
-                  priority
+                  width={45}
+                  height={45}
+                  quality={100}
                 />
                 <span className="hidden min-w-0 flex-1 flex-col lg:flex">
                   <span className="truncate text-sm font-medium text-gray-900">
-                    Demo User
+                    Noor Fahi
                   </span>
-                  <span className="truncate text-sm text-gray-500">
-                    Demo Role
-                  </span>
+                  <span className="truncate text-sm text-gray-500">Admin</span>
                 </span>
               </span>
               <EllipsisVerticalIcon
