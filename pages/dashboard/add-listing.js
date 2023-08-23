@@ -1,8 +1,43 @@
 import Tabs from '@/components/customs/tab';
 import DashboardLayout from '@/components/dashboard-layout';
+import Descriptions from '@/components/views/listing/forms/description';
+import Location from '@/components/views/listing/forms/location';
+import Media from '@/components/views/listing/forms/media';
 import React from 'react';
 
 const AddListing = () => {
+  const tabsAll = [
+    {
+      name: 'Description',
+      href: '#',
+      current: true,
+      component: <Descriptions />,
+    },
+    {
+      name: 'Media',
+      href: '#',
+      current: false,
+      component: <Media />,
+    },
+    {
+      name: 'Location',
+      href: '#',
+      current: false,
+      component: <Location />,
+    },
+    {
+      name: 'Details',
+      href: '#',
+      current: false,
+      component: <div>Details</div>,
+    },
+    {
+      name: 'Amenities',
+      href: '#',
+      current: false,
+      component: <div>Amenities</div>,
+    },
+  ];
   return (
     <DashboardLayout title="Add Listing">
       <div className="text-dark p-11">
@@ -13,8 +48,8 @@ const AddListing = () => {
             suscipit
           </p>
         </div>
-        <div className="w-full">
-          <Tabs />
+        <div className="w-full my-4">
+          <Tabs tabComponent={tabsAll} />
         </div>
       </div>
     </DashboardLayout>

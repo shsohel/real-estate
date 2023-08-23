@@ -78,7 +78,14 @@ const Header = ({ title, show }) => {
                   </button>
                 </div>
                 <div className="mx-4 border py-3 px-6 rounded hover:bg-primary hover:border-0">
-                  <button className="relative  ">Add Listing</button>
+                  <button
+                    className="relative "
+                    onClick={() => {
+                      handleAddListing();
+                    }}
+                  >
+                    Add Listing
+                  </button>
                 </div>
               </div>
               <div className="-mr-2 flex items-center sm:hidden">
