@@ -14,7 +14,7 @@ const Footer = () => {
   return (
     <div className="bg-dark min-h-[200px]">
       <div className="container pb-6">
-        <div className="grid grid-cols-3 gap-6 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
           <div className="px-2 ">
             <Image
               className=" h-8 w-auto mb-2"
@@ -45,7 +45,7 @@ const Footer = () => {
                 Subscribe
               </button>
             </div>
-            <div className="text-txt-mute flex gap-4">
+            <div className="text-txt-mute flex justify-center md:justify-start  gap-4">
               <TwitterIcon
                 width={20}
                 className="h-auto w-auto hover:text-light cursor-pointer"
@@ -66,8 +66,8 @@ const Footer = () => {
           </div>
         </div>
         {/* footer nav */}
-        <div className="grid grid-cols-2 gap-6 place-content-between text-txt-mute text-xs">
-          <div className="flex gap-6  ">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-content-between text-txt-mute text-xs">
+          <div className="flex gap-6 justify-center md:justify-start ">
             <Link href="/" className="hover:text-light">
               Term of Use
             </Link>
@@ -79,7 +79,7 @@ const Footer = () => {
             </Link>
           </div>
           <div>
-            <p className="text-end">© 2020 homeID. All Rights Reserved</p>
+            <p className="text-center md:text-end">© 2020 homeID. All Rights Reserved</p>
           </div>
         </div>
       </div>

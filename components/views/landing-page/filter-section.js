@@ -32,7 +32,7 @@ const FilterSection = () => {
 
   const getRanges = () => {};
   return (
-    <div className="text-gray-500">
+    <div className="text-gray-500 mb-6">
       <div>
         <Button className="bg-secondary py-6 rounded uppercase text-white">
           <Home className="mr-2 h-4 w-4" /> For Sale
@@ -41,29 +41,14 @@ const FilterSection = () => {
           <HomeModernIcon className="mr-2 h-4 w-4" /> For Rent
         </Button>
       </div>
-      <div className="w-full bg-white rounded p-3">
-        <div className="grid grid-cols-8 gap-6">
+      <div className="w-full bg-white rounded p-3 ">
+        <div className="grid grid-cols-1 md:grid-cols-8 gap-6">
           <div className="col-span-2">
             <label className="uppercase text-sm font-medium px-2">
               Home Type
             </label>
             <OptionSelect options={homeType} />
-            {/* <Select
-              styles={{
-                input: (styles) => ({
-                  ...styles,
-
-                  '[type="text"]': {
-                    fontFamily: 'Helvetica, sans-serif !important',
-                    fontSize: 13,
-                    fontWeight: 900,
-                    border: 'none !important',
-                    color: 'green !important',
-                    outline: '0 !important',
-                  },
-                }),
-              }}
-            /> */}
+          
           </div>
           <div className="col-span-3">
             <label className="uppercase text-sm font-medium px-2">Search</label>
@@ -78,8 +63,8 @@ const FilterSection = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-3  grid grid-cols-2">
-            <div className="py-4 group bg-gray-100 btn-search text-gray-600">
+          <div className="col-span-3  grid grid-cols-1 md:grid-cols-2">
+            <div className="py-4 group bg-gray-100 btn-search text-gray-600 text-center">
               <Button
                 className="group-[.btn-search]:bg-gray-100 hover:bg-white  hover:text-black"
                 onClick={() => {
@@ -99,7 +84,7 @@ const FilterSection = () => {
         </div>
         {/* Advanced Search Section */}
         {isOpenSearchBox && (
-          <div className="grid grid-cols-4 gap-4 mt-10 animate__animated animate__slideInDown  bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-10 animate__animated animate__slideInDown  bg-white">
             <div>
               <label className="uppercase text-sm font-medium px-2">
                 BEDROOMS
@@ -131,7 +116,7 @@ const FilterSection = () => {
               <div className="mt-6">
                 <RangeSlider
                   initialMin={0}
-                  initialMax={100}
+                  initialMax={1200}
                   min={0}
                   max={10000}
                   step={100}
@@ -147,7 +132,7 @@ const FilterSection = () => {
               <div className="mt-6">
                 <RangeSlider
                   initialMin={0}
-                  initialMax={100}
+                  initialMax={1000}
                   min={0}
                   max={10000}
                   step={100}
