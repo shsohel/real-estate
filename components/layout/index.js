@@ -3,7 +3,7 @@ import Header from './header';
 import Footer from './footer';
 import { ArrowBigUpIcon, ArrowUpIcon } from 'lucide-react';
 
-const Layouts = ({ title = 'Real State', children }) => {
+const Layouts = ({ title = 'Real State',isFromOtherPage=false, children }) => {
   const [show, setShow] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -60,7 +60,7 @@ const Layouts = ({ title = 'Real State', children }) => {
 
   return (
     <div>
-      <Header title={title} show={show} />
+      <Header title={title} show={show}  isFromOtherPage={isFromOtherPage}/>
       <main>{children}</main>
       <Footer />
       {visible && (

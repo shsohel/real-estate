@@ -11,7 +11,7 @@ import { Heart, HeartPulseIcon } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-const Header = ({ title, show }) => {
+const Header = ({ title, show, isFromOtherPage }) => {
   const router = useRouter();
 
   const handleAddListing = () => {
@@ -40,9 +40,17 @@ const Header = ({ title, show }) => {
           <link href="URL" rel="canonical"></link> */}
           </Head>
           <div
-            className={`mx-auto px-4 md:px-6 lg:px-24 py-2 bg-none fixed  z-40 w-full transition-all duration-1000  hidden md:block ${
-              show && 'bg-white text-dark shadow-2xl '
-            }`}
+            className={`mx-auto px-4 md:px-6 lg:px-24 py-2 bg-none fixed  z-40 w-full transition-all duration-1000  hidden md:block 
+            ${
+              show  && 'bg-white text-dark shadow-2xl border-b-0 '
+            }
+            
+            ${
+              isFromOtherPage&& 'bg-white text-dark border-b '
+            }
+            `
+          
+          }
           >
             <div className="flex justify-between h-16">
               <div className="flex items-center">
