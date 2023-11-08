@@ -1,48 +1,48 @@
 /** @format */
 
 export const propertyModel = {
-  title: "",
-  description: "",
+  title: '',
+  description: '',
   category: null,
   propertyType: null,
   averageRating: 0,
   price: 5600,
-  images: ["default-image"],
+  images: [],
   amenities: [
     {
-      name: "Attic",
+      name: 'Attic',
       isSelect: false,
     },
     {
-      name: "Front yard",
+      name: 'Front yard',
       isSelect: false,
     },
     {
-      name: "Private space",
+      name: 'Private space',
       isSelect: false,
     },
     {
-      name: "Basketball court",
+      name: 'Basketball court',
       isSelect: false,
     },
     {
-      name: "Lake view",
+      name: 'Lake view',
       isSelect: false,
     },
     {
-      name: "Sprinklers",
+      name: 'Sprinklers',
       isSelect: false,
     },
     {
-      name: "Doorman",
+      name: 'Doorman',
       isSelect: false,
     },
     {
-      name: "Ocean view",
+      name: 'Ocean view',
       isSelect: false,
     },
     {
-      name: "Wine cellar",
+      name: 'Wine cellar',
       isSelect: false,
     },
   ],
@@ -50,16 +50,16 @@ export const propertyModel = {
   lotSize: 0,
   rooms: 0,
   bedRooms: 0,
-  customID: "",
+  customID: '',
   garages: 0,
   garageSize: 0,
   yearBuilt: 0,
-  availableForm: "", //Date
-  basement: "",
-  roofing: "",
-  extraDetails: "",
-  exteriorMaterial: "",
-  structureType: "",
+  availableForm: '', //Date
+  basement: '',
+  roofing: '',
+  extraDetails: '',
+  exteriorMaterial: '',
+  structureType: '',
   floorsNo: 0,
-  address: "",
+  address: '',
 };

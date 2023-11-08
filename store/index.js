@@ -1,12 +1,12 @@
 /** @format */
 
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import auth from "./auth/reducers";
-import users from "./user/reducers";
-import propertyReducers from "./property/reducers";
+import auth from './auth/reducers';
+import users from './user/reducers';
+import propertyReducers from './property/reducers';
 
-import basicReducers from "./basic/reducers";
+import basicReducers from './basic/reducers';
 
 import {
   persistReducer,
@@ -16,8 +16,8 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
   auth,
@@ -37,10 +37,10 @@ const rootReducer = combineReducers({
 //     : [thunk, createDebounce()];
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   version: 1,
   storage,
-  whitelist: ["auth", "productCarts"],
+  whitelist: ['auth', 'productCarts'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -50,13 +50,18 @@ export const store = configureStore({
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(...middleware),
 
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-      immutableCheck: {
-        // ignoredPaths: ["products", "productCarts"],
-      },
-    }),
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: {
+  //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+  //     },
+  //     // immutableCheck: {
+  //     //   // ignoredPaths: ["products", "productCarts"],
+  //     // },
+  //   }),
+
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: false,
+  //   }),
 });

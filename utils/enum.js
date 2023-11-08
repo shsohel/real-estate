@@ -38,3 +38,8 @@ export const countriesOption = countryData.map((country) => ({
     label: state.name,
   })),
 }));
+
+export const propertyCategories = [
+  { label: 'For Rent', value: 'For rent' },
+  { label: 'For Sale', value: 'For Sale' },
+];

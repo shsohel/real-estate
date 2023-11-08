@@ -1,16 +1,46 @@
+'use client';
+
 import Input from '@/components/customs/input';
 import Select from '@/components/customs/select';
+import { appUrl } from '@/config';
+import { photoUpload } from '@/store/file/actions';
+import { bindPropertyBasic } from '@/store/property/actions';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Media() {
+  const dispatch = useDispatch();
+  const { propertyInfo } = useSelector(
+    ({ propertyReducers }) => propertyReducers
+  );
+
+  const { images } = propertyInfo;
   const inputFile = useRef(null);
   const handleClickFile = () => {
     // `current` points to the mounted file input element
     inputFile.current.click();
   };
-  const handleFileChange = (e) => {
-    console.log(e.target.files[0]);
+
+  const bindAfterUpload = (fileUrl) => {
+    const updatedImage = [...images, fileUrl];
+    const updatedObject = {
+      ...propertyInfo,
+      images: updatedImage,
+    };
+
+    dispatch(bindPropertyBasic(updatedObject));
+  };
+
+  const handleFileChange = (event) => {
+    const { files } = event.target;
+    const file = files[0];
+    let formData = new FormData();
+    formData.append('file', file);
+
+    dispatch(photoUpload(formData, bindAfterUpload));
+    //const images = [...product.images];
   };
   return (
     <div className="grid sm:grid-cols-2 grid-cols-1 gap-6">
@@ -54,10 +84,31 @@ function Media() {
                     type="file"
                     onChange={handleFileChange}
                     onDrag={handleFileChange}
+                    accept="image/png, image/jpeg"
                   />
                   <p className="text-sm text-mute-200 my-3">
                     Photos must be JPEG or PNG format and least 1024x768
                   </p>
+                </div>
+              </div>
+              <div>
+                <h2 className="text-sm text-txt-mute italic font-medium mb-1">
+                  Uploaded Images
+                </h2>
+                <div className="border rounded grid grid-cols-2 gap-3 p-1">
+                  {images.map((image, index) => {
+                    return (
+                      <div key={index} className="border">
+                        <Image
+                          className="h-20 lg:h-40 w-full object-cover"
+                          src={`${appUrl}/uploads/${image}`}
+                          height={200}
+                          width={200}
+                          alt="image"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

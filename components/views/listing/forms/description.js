@@ -1,14 +1,15 @@
 /** @format */
 
-"use client";
-import Input from "@/components/customs/input";
-import Select from "@/components/customs/select";
+'use client';
+import Input from '@/components/customs/input';
+import Select from '@/components/customs/select';
 
-import { bindPropertyBasic } from "@/store/property/actions";
-import SelectBox from "@/utils/custom/SelectBox";
-import React from "react";
+import { bindPropertyBasic } from '@/store/property/actions';
+import SelectBox from '@/utils/custom/SelectBox';
+import { propertyCategories } from '@/utils/enum';
+import React from 'react';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
 function Descriptions() {
   const dispatch = useDispatch();
@@ -46,12 +47,22 @@ function Descriptions() {
   const handleOnChange = (e) => {
     const { name, value, checked, type } = e.target;
     const updatedProperty = {
+      ...propertyInfo,
       [name]:
-        type === "number"
+        type === 'number'
           ? Number(value)
-          : type === "checkbox"
+          : type === 'checkbox'
           ? checked
           : value,
+    };
+    dispatch(bindPropertyBasic(updatedProperty));
+  };
+
+  const handleDropdownOnChange = (data, e) => {
+    const { name } = e;
+    const updatedProperty = {
+      ...propertyInfo,
+      [name]: data,
     };
     dispatch(bindPropertyBasic(updatedProperty));
   };
@@ -114,14 +125,21 @@ function Descriptions() {
                 id="category"
                 label="Category"
                 name="category"
-                onChange={(data, e) => {}}
-                invalid={true}
+                options={propertyCategories}
+                value={category}
+                onChange={(data, e) => {
+                  handleDropdownOnChange(data, e);
+                }}
               />
               <SelectBox
-                id="listedInd"
+                id="propertyType"
                 label="Listed in"
-                name="listedInd"
-                onChange={(data, e) => {}}
+                name="propertyType"
+                options={propertyCategories}
+                value={propertyType}
+                onChange={(data, e) => {
+                  handleDropdownOnChange(data, e);
+                }}
               />
             </div>
           </div>
@@ -141,10 +159,30 @@ function Descriptions() {
           <div className="mt-8">
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 my-2">
               <div>
-                <Input label="Price in $ (only numbers)" name="" />
+                <Input
+                  id="price"
+                  type="number"
+                  name="price"
+                  placeholder="Please Price"
+                  label="Price in $ (only numbers)"
+                  value={price}
+                  onChange={(e) => {
+                    handleOnChange(e);
+                  }}
+                />
               </div>
               <div>
-                <Input label="Yearly Tax Rate" />
+                <Input
+                  id="averageRating"
+                  type="number"
+                  name="averageRating"
+                  placeholder="Please Rate Here"
+                  label="Yearly Tax Rate)"
+                  value={averageRating}
+                  onChange={(e) => {
+                    handleOnChange(e);
+                  }}
+                />
               </div>
             </div>
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 my-2">
@@ -170,7 +208,18 @@ function Descriptions() {
           </div>
           <div className="mt-8">
             <div className="  my-2">
-              <Select label="Property Status" />
+              {/* <Select label="Property Status" /> */}
+
+              <SelectBox
+                id="propertyType"
+                label="Property Status"
+                name="propertyType"
+                options={propertyCategories}
+                value={propertyType}
+                onChange={(data, e) => {
+                  handleDropdownOnChange(data, e);
+                }}
+              />
             </div>
           </div>
         </div>

@@ -2,17 +2,22 @@ import axios from 'axios';
 import { notify } from '../../../utils/custom/Notification';
 import { status } from '../../../utils/enum';
 
-export const productImageUpload = (file, callback) => (dispatch) => {
-  const apiEndPoint = `http://localhost:5000/api/v1/fileupload/photo`;
-  axios.post(apiEndPoint, file).then((response) => {
-    if (response.status === 200) {
-      callback(response.data.data.fileUrl);
-    }
-  });
+export const photoUpload = (file, callback) => (dispatch) => {
+  const apiEndPoint = `http://localhost:8082/api/v1/fileupload/photo`;
+  axios
+    .post(apiEndPoint, file)
+    .then((response) => {
+      if (response.status === 200) {
+        callback(response.data.data.fileUrl);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const fileUpload = (file, callback) => (dispatch, getState) => {
-  const apiEndPoint = `http://localhost:5000/api/v1/fileupload/photo`;
+  const apiEndPoint = `http://localhost:8082/api/v1/fileupload/photo`;
   axios.post(apiEndPoint, file).then((response) => {
     if (response.status === 200) {
       callback(response.data.data.fileUrl);
