@@ -1,8 +1,62 @@
-import Input from '@/components/customs/input';
-import Select from '@/components/customs/select';
-import React from 'react';
+/** @format */
+
+"use client";
+import Input from "@/components/customs/input";
+import Select from "@/components/customs/select";
+
+import { bindPropertyBasic } from "@/store/property/actions";
+import SelectBox from "@/utils/custom/SelectBox";
+import React from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 
 function Descriptions() {
+  const dispatch = useDispatch();
+  const { propertyInfo } = useSelector(
+    ({ propertyReducers }) => propertyReducers
+  );
+
+  const {
+    title,
+    description,
+    category,
+    propertyType,
+    averageRating,
+    price,
+    images,
+    amenities,
+    size,
+    lotSize,
+    rooms,
+    bedRooms,
+    customID,
+    garages,
+    garageSize,
+    yearBuilt,
+    availableForm, //Date
+    basement,
+    roofing,
+    extraDetails,
+    exteriorMaterial,
+    structureType,
+    floorsNo,
+    address,
+  } = propertyInfo;
+
+  const handleOnChange = (e) => {
+    const { name, value, checked, type } = e.target;
+    const updatedProperty = {
+      [name]:
+        type === "number"
+          ? Number(value)
+          : type === "checkbox"
+          ? checked
+          : value,
+    };
+    dispatch(bindPropertyBasic(updatedProperty));
+  };
+
+  console.log(title);
   return (
     <div className="grid sm:grid-cols-2 grid-cols-1 gap-6">
       <div>
@@ -16,15 +70,31 @@ function Descriptions() {
           </div>
           <div className="mt-8">
             <div className="grid grid-cols-1 gap-2 my-2">
-              <div>
-                <label className="text-sm mb-2">Title (mandatory)</label>
-                <input className="rounded bg-gray-200 border-0 w-full" />
-              </div>
+              <Input
+                id="title"
+                name="title"
+                placeholder="Please Title Here"
+                label="Title (mandatory)"
+                value={title}
+                onChange={(e) => {
+                  handleOnChange(e);
+                }}
+              />
             </div>
             <div className="grid grid-cols-1 gap-2 my-2">
               <div>
                 <label className="text-sm mb-2">Description</label>
-                <textarea className="rounded bg-gray-200 border-0 w-full min-h-[107px]" />
+                <textarea
+                  className="rounded bg-gray-200 border-0 w-full min-h-[107px]"
+                  id="description"
+                  name="description"
+                  placeholder="Please description here"
+                  label="Description"
+                  value={description}
+                  onChange={(e) => {
+                    handleOnChange(e);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -40,12 +110,19 @@ function Descriptions() {
           </div>
           <div className="mt-8">
             <div className="grid grid-cols-2 gap-2 my-2">
-              <div>
-                <Select label="Category" />
-              </div>
-              <div>
-                <Select label="Listed in" />
-              </div>
+              <SelectBox
+                id="category"
+                label="Category"
+                name="category"
+                onChange={(data, e) => {}}
+                invalid={true}
+              />
+              <SelectBox
+                id="listedInd"
+                label="Listed in"
+                name="listedInd"
+                onChange={(data, e) => {}}
+              />
             </div>
           </div>
         </div>
@@ -64,7 +141,7 @@ function Descriptions() {
           <div className="mt-8">
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 my-2">
               <div>
-                <Input label="Price in $ (only numbers)" />
+                <Input label="Price in $ (only numbers)" name="" />
               </div>
               <div>
                 <Input label="Yearly Tax Rate" />

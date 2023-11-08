@@ -1,0 +1,4 @@
+/** @format */
+
+export const GET_ALL_PROPERTIES_BY_QUERY = "GET_ALL_PROPERTIES_BY_QUERY";
+export const BIND_PROPERTY_INFO = "BIND_PROPERTY_INFO";
