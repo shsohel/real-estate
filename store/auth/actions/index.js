@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { notify } from '../../../utils/custom/Notification';
-import { GET_AUTH_USER } from '../action-types';
-import { GET_CUSTOMER_ORDERS } from 'store/order/action-types';
+import { GET_AUTH_USER } from "../action-types";
 // axios.defaults.withCredentials = true;
 
 export const bindAuthUser = (user) => (dispatch) => {
@@ -154,23 +153,7 @@ export const resetPassword = (obj, responseBack) => async (dispatch) => {
       responseBack(false);
     });
 };
-export const getCustomerOrders = (obj) => async (dispatch) => {
-  const apiEndPoint = `/api/order/get-customer-orders`;
-  await axios
-    .post(apiEndPoint, [])
-    .then((response) => {
-      const customerOrders = response.data.data;
-      dispatch({
-        type: GET_CUSTOMER_ORDERS,
-        customerOrders,
-      });
-    })
-    .catch(({ response }) => {
-      if (response.status === 400) {
-        notify('error', `${response.data.error}`);
-      }
-    });
-};
+
 
 export const register = (obj, responseBack) => async (dispatch) => {
   const apiEndPoint = `/api/auth/registration`;

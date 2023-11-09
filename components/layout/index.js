@@ -3,13 +3,18 @@ import Header from './header';
 import Footer from './footer';
 import { ArrowBigUpIcon, ArrowUpIcon } from 'lucide-react';
 
-const Layouts = ({ title = 'Real State',isFromOtherPage=false, children }) => {
+const Layouts = ({
+  title = "Real State",
+  isFromOtherPage = false,
+  children,
+  isFromAnother = false,
+}) => {
   const [show, setShow] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const [visible, setVisible] = useState(false);
   const backTop = () => {
-    window.scroll({ behavior: 'smooth', top: 0 });
+    window.scroll({ behavior: "smooth", top: 0 });
   };
 
   // Show Button After Scrolling Down More than 500px
@@ -26,14 +31,14 @@ const Layouts = ({ title = 'Real State',isFromOtherPage=false, children }) => {
 
   useEffect(() => {
     // Listen for Scrolling Event
-    window.addEventListener('scroll', toggleVisible, false);
+    window.addEventListener("scroll", toggleVisible, false);
     return () => {
-      window.removeEventListener('scroll', toggleVisible, false);
+      window.removeEventListener("scroll", toggleVisible, false);
     };
   }, []);
 
   const controlNavbar = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.scrollY > 0) {
         // if scroll down hide the navbar
         setShow(true);
@@ -48,19 +53,23 @@ const Layouts = ({ title = 'Real State',isFromOtherPage=false, children }) => {
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar);
 
       // cleanup function
       return () => {
-        window.removeEventListener('scroll', controlNavbar);
+        window.removeEventListener("scroll", controlNavbar);
       };
     }
   }, [lastScrollY]);
 
   return (
     <div>
-      <Header title={title} show={show}  isFromOtherPage={isFromOtherPage}/>
+      <Header
+        title={title}
+        show={show || isFromAnother}
+        isFromOtherPage={isFromOtherPage}
+      />
       <main>{children}</main>
       <Footer />
       {visible && (

@@ -6,12 +6,13 @@ import Image from 'next/image';
 import React from 'react';
 import partner01 from '@/images/my-properties-01.jpg';
 import { Edit2, Trash2 } from 'lucide-react';
+import Link from "next/link";
 
 const MyProperties = () => {
   return (
     <DashboardLayout title="My Properties">
       <div className="text-dark p-11">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
             <div className="flex items-center gap-4">
               <h2 className="text-2xl font-medium">My Properties</h2>
@@ -24,7 +25,7 @@ const MyProperties = () => {
               suscipit
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             <Input
               label="Search"
               placeholder="Search Properties"
@@ -32,6 +33,14 @@ const MyProperties = () => {
               border="border border-gray-300"
             />
             <Select label="Sort By" />
+            <div className="flex items-center justify-end">
+              <Link
+                href="/dashboard/add-listing"
+                className="border hover:text-white hover:bg-secondary rounded font-semibold uppercase bg-primary py-[0.55rem] px-2 mt-4"
+              >
+                Add Listing
+              </Link>
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-4">

@@ -8,9 +8,24 @@ function classNames(...classes) {
 }
 
 import userAvatar from '@/images/agent-16.jpg';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/auth/actions";
 
 const UserDropdown = () => {
-  const handleLogout = () => {};
+  const dispatch = useDispatch();
+  const { authUser } = useSelector(({ auth }) => auth);
+
+  const router = useRouter();
+  // const handleLogout = () => {
+
+  // };
+
+  const handleCallback = () => {
+    router.push("/auth/login");
+  };
+  const handleLogout = () => {
+    dispatch(logout(handleCallback));
+  };
 
   return (
     <div>
@@ -29,9 +44,11 @@ const UserDropdown = () => {
                 />
                 <span className="hidden min-w-0 flex-1 flex-col lg:flex">
                   <span className="truncate text-sm font-medium text-gray-900">
-                    Noor Fahi
+                    {authUser?.name.toUpperCase() ?? "Demo User"}
                   </span>
-                  <span className="truncate text-sm text-gray-500">Admin</span>
+                  <span className="truncate text-sm text-gray-500">
+                    {authUser?.role.toUpperCase() ?? "Demo Role"}
+                  </span>
                 </span>
               </span>
               <EllipsisVerticalIcon
@@ -57,8 +74,8 @@ const UserDropdown = () => {
                   <a
                     href="#"
                     className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
                     )}
                   >
                     View profile
@@ -70,8 +87,8 @@ const UserDropdown = () => {
                   <a
                     href="#"
                     className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
                     )}
                   >
                     Settings
@@ -83,8 +100,8 @@ const UserDropdown = () => {
                   <a
                     href="#"
                     className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm"
                     )}
                   >
                     Notifications
@@ -101,8 +118,8 @@ const UserDropdown = () => {
                       handleLogout();
                     }}
                     className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full px-4 py-2 text-left text-sm'
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block w-full px-4 py-2 text-left text-sm"
                     )}
                   >
                     Logout

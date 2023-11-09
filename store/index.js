@@ -47,18 +47,18 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(...middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(...middleware),
 
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: {
-  //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  //     },
-  //     // immutableCheck: {
-  //     //   // ignoredPaths: ["products", "productCarts"],
-  //     // },
-  //   }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+      immutableCheck: {
+        ignoredPaths: ["propertyReducers"],
+      },
+    }),
 
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware({

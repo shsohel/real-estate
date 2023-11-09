@@ -10,13 +10,28 @@ import { SelectOption } from '../customs/select-option';
 import { Heart, HeartPulseIcon } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/auth/actions";
 
 const Header = ({ title, show, isFromOtherPage }) => {
+  const dispatch = useDispatch();
+  const { authUser } = useSelector(({ auth }) => auth);
+
   const router = useRouter();
 
   const handleAddListing = () => {
-    router.push('/dashboard/add-listing');
+    router.push("/dashboard/add-listing");
   };
+  const gotoSignIn = () => {
+    router.push("/auth/login");
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  console.log("show", JSON.stringify(show, null, 2));
+
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -41,16 +56,10 @@ const Header = ({ title, show, isFromOtherPage }) => {
           </Head>
           <div
             className={`mx-auto px-4 md:px-6 lg:px-24 py-2 bg-none fixed  z-40 w-full transition-all duration-1000  hidden md:block 
-            ${
-              show  && 'bg-white text-dark shadow-2xl border-b-0 '
-            }
+            ${show && "bg-white text-dark shadow-2xl border-b-0 "}
             
-            ${
-              isFromOtherPage&& 'bg-white text-dark border-b '
-            }
-            `
-          
-          }
+            ${isFromOtherPage && "bg-white text-dark border-b "}
+            `}
           >
             <div className="flex justify-between h-16">
               <div className="flex items-center">
@@ -73,8 +82,25 @@ const Header = ({ title, show, isFromOtherPage }) => {
               <div className="hidden md:ml-6 md:flex md:items-center ">
                 <div className="divide-x  flex items-center">
                   <SelectOption />
-                  <div>
-                    <button className="ml-3 uppercase text-sm">Sign In</button>
+                  <div className="relative group ">
+                    <button
+                      hidden={authUser}
+                      onClick={() => {
+                        gotoSignIn();
+                      }}
+                      className="ml-3 uppercase text-sm"
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      hidden={!authUser}
+                      onClick={() => {
+                        handleLogout();
+                      }}
+                      className="ml-3 uppercase text-sm"
+                    >
+                      Logout
+                    </button>
                   </div>
                 </div>
                 <div className="mx-4">
@@ -96,33 +122,32 @@ const Header = ({ title, show, isFromOtherPage }) => {
                   </button>
                 </div>
               </div>
-            
             </div>
           </div>
-              <div className="-mr-2 flex justify-between items-center md:hidden p-2 fixed w-full bg-white z-50">
-             <div>
-             <Image
-                    className="h-8 w-auto"
-                    src={logo2}
-                    // width={20}
-                    // height={20}
-                    alt="Workflow"
-                  />
-             </div>
-                <Disclosure.Button className="inline-flex  items-center justify-center  p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-0 focus:ring-inset focus:ring-indigo-500">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
+          <div className="-mr-2 flex justify-between items-center md:hidden p-2 fixed w-full bg-white z-50">
+            <div>
+              <Image
+                className="h-8 w-auto"
+                src={logo2}
+                // width={20}
+                // height={20}
+                alt="Workflow"
+              />
+            </div>
+            <Disclosure.Button className="inline-flex  items-center justify-center  p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-0 focus:ring-inset focus:ring-indigo-500">
+              <span className="sr-only">Open main menu</span>
+              {open ? (
+                <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </Disclosure.Button>
+          </div>
 
-          <Disclosure.Panel className="md:hidden bg-secondary fixed w-full mt-14 z-50 " >
+          <Disclosure.Panel className="md:hidden bg-secondary fixed w-full mt-14 z-50 ">
             <div className=" p-3 space-y-1 transition-all duration-1000">
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
-              
+
               <Disclosure.Button
                 as="a"
                 href="#"
@@ -135,7 +160,7 @@ const Header = ({ title, show, isFromOtherPage }) => {
                 href="#"
                 className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
               >
-              Properties
+                Properties
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
@@ -164,9 +189,7 @@ const Header = ({ title, show, isFromOtherPage }) => {
                   />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium ">
-                    Tom Cook
-                  </div>
+                  <div className="text-base font-medium ">Tom Cook</div>
                   <div className="text-sm font-medium text-gray-500">
                     tom@example.com
                   </div>

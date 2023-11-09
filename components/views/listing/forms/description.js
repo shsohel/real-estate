@@ -6,10 +6,14 @@ import Select from '@/components/customs/select';
 
 import { bindPropertyBasic } from '@/store/property/actions';
 import SelectBox from '@/utils/custom/SelectBox';
-import { propertyCategories } from '@/utils/enum';
-import React from 'react';
+import {
+  propertyCategories,
+  propertyLabels,
+  propertyTypes,
+} from "@/utils/enum";
+import React from "react";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 function Descriptions() {
   const dispatch = useDispatch();
@@ -22,9 +26,15 @@ function Descriptions() {
     description,
     category,
     propertyType,
+    propertyStatus,
     averageRating,
     price,
+    unit,
+    homeOwnerAssociationFee,
+    afterPriceLabel,
+    beforePriceLabel,
     images,
+    videos,
     amenities,
     size,
     lotSize,
@@ -49,9 +59,9 @@ function Descriptions() {
     const updatedProperty = {
       ...propertyInfo,
       [name]:
-        type === 'number'
+        type === "number"
           ? Number(value)
-          : type === 'checkbox'
+          : type === "checkbox"
           ? checked
           : value,
     };
@@ -69,7 +79,7 @@ function Descriptions() {
 
   console.log(title);
   return (
-    <div className="grid sm:grid-cols-2 grid-cols-1 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="bg-white p-5 border rounded">
           <div>
@@ -135,7 +145,7 @@ function Descriptions() {
                 id="propertyType"
                 label="Listed in"
                 name="propertyType"
-                options={propertyCategories}
+                options={propertyTypes}
                 value={propertyType}
                 onChange={(data, e) => {
                   handleDropdownOnChange(data, e);
@@ -187,13 +197,40 @@ function Descriptions() {
             </div>
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 my-2">
               <div>
-                <Input label="Homeowners Asso. Fee (monthly)" />
+                <Input
+                  id="homeOwnerAssociationFee"
+                  type="number"
+                  label="Homeowners Asso. Fee (monthly)"
+                  name="homeOwnerAssociationFee"
+                  value={homeOwnerAssociationFee}
+                  onChange={(e) => {
+                    handleOnChange(e);
+                  }}
+                />
               </div>
               <div>
-                <Input label="After Price Label ( ex: /month)" />
+                <Input
+                  id="afterPriceLabel"
+                  type="number"
+                  label="After Price Label ( ex: /month)"
+                  name="afterPriceLabel"
+                  value={afterPriceLabel}
+                  onChange={(e) => {
+                    handleOnChange(e);
+                  }}
+                />
               </div>
               <div>
-                <Input label={`Before Price label (ex: "from")`} />
+                <Input
+                  id="beforePriceLabel"
+                  type="number"
+                  label={`Before Price label (ex: "from")`}
+                  name="beforePriceLabel"
+                  value={beforePriceLabel}
+                  onChange={(e) => {
+                    handleOnChange(e);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -211,11 +248,11 @@ function Descriptions() {
               {/* <Select label="Property Status" /> */}
 
               <SelectBox
-                id="propertyType"
+                id="propertyStatus"
                 label="Property Status"
-                name="propertyType"
-                options={propertyCategories}
-                value={propertyType}
+                name="propertyStatus"
+                options={propertyLabels}
+                value={propertyStatus}
                 onChange={(data, e) => {
                   handleDropdownOnChange(data, e);
                 }}

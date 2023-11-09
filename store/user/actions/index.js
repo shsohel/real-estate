@@ -1,14 +1,12 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
-import { confirmDialog } from '../../../components/custom/ConfirmDialogue';
-import { baseAxios } from '../../../services';
-import { notify } from '../../../utils/custom/Notification';
-import { confirmObj, status } from '../../../utils/enum';
+
+import { notify } from "../../../utils/custom/Notification";
+import { confirmObj, status } from "../../../utils/enum";
 import {
   capitalizeFirstLetter,
   convertQueryString,
   uniqId,
-} from '../../../utils/utolity';
+} from "../../../utils/utolity";
 import {
   USER_DATA_ON_PROGRESS,
   USER_DATA_SUBMIT_PROGRESS,
@@ -17,8 +15,9 @@ import {
   GET_USER_BY_ID,
   OPEN_USER_SIDEBAR,
   BIND_USER_ATTRIBUTES,
-} from '../action-types';
-import { userBasicInfoModal } from '../model';
+} from "../action-types";
+import { userBasicInfoModal } from "../model";
+import { confirmDialog } from "@/components/customs/ConfirmDialogue";
 
 export const userDataOnProgress = (condition) => (dispatch) => {
   dispatch({
