@@ -100,7 +100,7 @@ function Media() {
                     return (
                       <div key={index} className="border">
                         <Image
-                          className="h-20 lg:h-40 w-full object-cover"
+                          className="h-20 lg:h-48 w-full object-cover"
                           src={`${appUrl}/uploads/${image}`}
                           height={200}
                           width={200}
