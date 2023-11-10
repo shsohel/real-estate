@@ -1,7 +1,11 @@
 /** @format */
 
 import axios from 'axios';
-import { BIND_PROPERTY_INFO, GET_USER_PROPERTIES } from '../action-types';
+import {
+  BIND_PROPERTY_INFO,
+  GET_ALL_PROPERTIES_BY_QUERY,
+  GET_USER_PROPERTIES,
+} from '../action-types';
 import { propertyModel } from '../models';
 import { dataOnProgress } from '@/store/basic/actions';
 import { notify } from '@/utils/custom/Notification';
@@ -152,6 +156,28 @@ export const getUserProperties = (queryObj) => (dispatch) => {
         dispatch({
           type: GET_USER_PROPERTIES,
           userProperties: data,
+          queryObj,
+          total: response.data.total,
+        });
+        dispatch(dataOnProgress(false));
+      }
+    })
+    .catch((error) => {
+      notify('Error', 'Please contact the support team');
+      dispatch(dataOnProgress(false));
+    });
+};
+export const getPropertiesByQuery = (queryObj) => (dispatch) => {
+  dispatch(dataOnProgress(true));
+  const apiEndpoint = `/api/property`;
+  axios
+    .post(apiEndpoint, queryObj)
+    .then((response) => {
+      if (response.status === 200) {
+        const data = response.data.data;
+        dispatch({
+          type: GET_ALL_PROPERTIES_BY_QUERY,
+          allProperties: data,
           queryObj,
           total: response.data.total,
         });

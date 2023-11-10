@@ -161,7 +161,7 @@ const EditListing = () => {
         <div className="text-dark p-11">
           <div className="grid grid-cols-2 ">
             <div>
-              <h2 className="text-2xl font-medium">Add new property</h2>
+              <h2 className="text-2xl font-medium">Update property</h2>
               <p className="text-mute-200 text-sm font-normal">
                 Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse
                 suscipit

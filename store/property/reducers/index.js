@@ -20,6 +20,8 @@ const propertyReducers = (state = initialState, action) => {
     case GET_ALL_PROPERTIES_BY_QUERY:
       return {
         ...state,
+        queryObj: action.queryObj,
+        total: action.total,
         allProperties: action.allProperties,
       };
     case GET_USER_PROPERTIES:

@@ -38,6 +38,7 @@ const SelectBox = (props) => {
           menuPortalTarget={document.body}
           id={id}
           instanceId={id}
+          isClearable
           name={name}
           value={value}
           options={options}

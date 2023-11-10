@@ -118,9 +118,9 @@ const RangeSlider = ({
       </div>
       {!inputBox && (
         <div className="my-1 text-sm font-medium  flex items-center justify-center">
-          <span>${minValue}</span>
+          <span>{minValue}</span>
           <span className="mx-2">to</span>
-          <span>${maxValue}</span>
+          <span>{maxValue}</span>
         </div>
       )}
     </div>

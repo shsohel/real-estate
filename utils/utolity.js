@@ -47,6 +47,18 @@ export const convertQueryString = (params) => {
 //     return 'myArray[' + idx + ']=' + el;
 // }).join('&');
 
+export function removeFalsyProperties(obj) {
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      // Check for falsy values (undefined, null, "", 0, false)
+      if (!obj[key] && obj[key] !== false) {
+        delete obj[key];
+      }
+    }
+  }
+  return obj;
+}
+
 export const arrayTypeQuery = (obj) => {
   // Function to encode the value for URL
   const encodeValue = (value) => encodeURIComponent(value);
