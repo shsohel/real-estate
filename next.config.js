@@ -13,13 +13,13 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '8082',
-        pathname: '/uploads/**',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'api-jgj6.onrender.com',
         port: '',
-        pathname: '/uploads/**',
+        pathname: '/**',
       },
       {
         protocol: 'http',

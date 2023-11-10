@@ -1,8 +1,8 @@
 import CheckBox from '@/components/customs/CheckBox';
-import { bindPropertyBasic } from "@/store/property/actions";
+import { bindPropertyBasic } from '@/store/property/actions';
 
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Amenities() {
   const dispatch = useDispatch();
@@ -13,15 +13,17 @@ function Amenities() {
   const { amenities } = propertyInfo;
   const handleOnChange = (e) => {
     const { name, value, checked, type } = e.target;
+    console.log(name);
+
     const updatedAmenities = amenities.map((amenity) => {
-      if (amenity === name) {
-        amenity[name] = checked;
+      if (amenity.name === name) {
+        amenity['isSelect'] = checked;
       }
       return amenity;
     });
     const updatedProperty = {
       ...propertyInfo,
-      ["amenities"]: updatedAmenities,
+      ['amenities']: updatedAmenities,
     };
     dispatch(bindPropertyBasic(updatedProperty));
   };
@@ -33,6 +35,9 @@ function Amenities() {
     };
     dispatch(bindPropertyBasic(updatedProperty));
   };
+
+  console.log(amenities);
+
   return (
     <div className="grid  grid-cols-1 gap-6">
       <div className="bg-white p-5 border rounded">
@@ -47,16 +52,17 @@ function Amenities() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 my-2">
             {amenities.map((amenity, index) => {
               return (
-                <dvi key={index}>
+                <div key={index}>
                   <CheckBox
                     id={amenity.name}
                     label={amenity.name}
+                    name={amenity.name}
                     checked={amenity.isSelect}
                     onChange={(e) => {
                       handleOnChange(e);
                     }}
                   />
-                </dvi>
+                </div>
               );
             })}
           </div>

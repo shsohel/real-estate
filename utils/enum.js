@@ -39,35 +39,39 @@ export const countriesOption = countryData.map((country) => ({
   })),
 }));
 
-export const propertyLabels = [{ label: "Hot Offer", value: "Hot Offer" }];
+export const propertyLabels = [{ label: 'Hot Offer', value: 'Hot Offer' }];
+
+export const sortTypes = [
+  { label: 'Category', value: 'category' },
+  { label: 'Property Types', value: 'propertyTypes' },
+];
 export const propertyTypes = [
-  { label: "For Rent", value: "For rent" },
-  { label: "For Sale", value: "For Sale" },
+  { label: 'For Rent', value: 'For rent' },
+  { label: 'For Sale', value: 'For Sale' },
 ];
 export const propertyStatus = [
-  { label: "For Rent", value: "For rent" },
-  { label: "For Sale", value: "For Sale" },
+  { label: 'For Rent', value: 'For rent' },
+  { label: 'For Sale', value: 'For Sale' },
 ];
 export const unitTypes = [
-  { label: "None", value: "None" },
-  { label: "Thousand", value: "Thousand" },
-  { label: "Billion", value: "Billion" },
-  { label: "Million", value: "Million" },
+  { label: 'None', value: 'None' },
+  { label: 'Thousand', value: 'Thousand' },
+  { label: 'Billion', value: 'Billion' },
+  { label: 'Million', value: 'Million' },
 ];
 export const propertyCategories = [
-  { label: "Apartment", value: "Apartment" },
-  { label: "Bar", value: "Bar" },
-  { label: "Cafe", value: "Cafe" },
-  { label: "Farm", value: "House" },
-  { label: "Restaurant", value: "Restaurant" },
-  { label: "Single Family", value: "Single Family" },
-  { label: "Spa", value: "Spa" },
-  { label: "Store", value: "Store" },
-  { label: "Villa", value: "Villa" },
+  { label: 'Apartment', value: 'Apartment' },
+  { label: 'Bar', value: 'Bar' },
+  { label: 'Cafe', value: 'Cafe' },
+  { label: 'Farm', value: 'House' },
+  { label: 'Restaurant', value: 'Restaurant' },
+  { label: 'Single Family', value: 'Single Family' },
+  { label: 'Spa', value: 'Spa' },
+  { label: 'Store', value: 'Store' },
+  { label: 'Villa', value: 'Villa' },
 ];
 
 export const videoTypes = [
-  { label: "Youtube", value: "Youtube" },
-  { label: "Facebook", value: "Facebook" },
+  { label: 'Youtube', value: 'Youtube' },
+  { label: 'Facebook', value: 'Facebook' },
 ];
-

@@ -6,20 +6,27 @@ import Descriptions from '@/components/views/listing/forms/description';
 import Location from '@/components/views/listing/forms/location';
 import Media from '@/components/views/listing/forms/media';
 import Details from '@/components/views/listing/forms/details';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Amenities from '@/components/views/listing/forms/amenities';
-import { postPoperies } from '@/store/property/actions';
+import {
+  bindPropertyBasic,
+  getUserPropertyById,
+  postPoperies,
+  updatePoperies,
+} from '@/store/property/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import ProgressLoader from '@/components/customs/ProgressLoader';
 import { useRouter } from 'next/router';
+import ProgressLoader from '@/components/customs/ProgressLoader';
 
-const AddListing = () => {
+const EditListing = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { propertyInfo } = useSelector(
     ({ propertyReducers }) => propertyReducers
   );
   const { isDataProgress } = useSelector(({ basicReducers }) => basicReducers);
+
+  const { id } = router.query;
 
   const {
     title,
@@ -61,6 +68,15 @@ const AddListing = () => {
     zipCode,
     formattedAddress,
   } = propertyInfo;
+
+  useEffect(() => {
+    dispatch(getUserPropertyById(id));
+
+    return () => {
+      dispatch(bindPropertyBasic());
+    };
+  }, [dispatch, id]);
+
   const tabsAll = [
     {
       name: 'Description',
@@ -93,12 +109,6 @@ const AddListing = () => {
       component: <Amenities />,
     },
   ];
-
-  const callback = (data) => {
-    router.push({
-      pathname: `/dashboard/edit-property/${data.id}`,
-    });
-  };
 
   const handleSubmit = () => {
     const submitObj = {
@@ -143,10 +153,10 @@ const AddListing = () => {
       // zipCode,
       // formattedAddress,
     };
-    dispatch(postPoperies(submitObj, callback));
+    dispatch(updatePoperies(submitObj, id));
   };
   return (
-    <DashboardLayout title="Add Listing">
+    <DashboardLayout title="Edit Listing">
       <ProgressLoader isProgress={isDataProgress}>
         <div className="text-dark p-11">
           <div className="grid grid-cols-2 ">
@@ -177,4 +187,4 @@ const AddListing = () => {
   );
 };
 
-export default AddListing;
+export default EditListing;

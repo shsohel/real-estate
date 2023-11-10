@@ -1,6 +1,6 @@
 /** @format */
 
-import defaultImage from "../images/default-image.jpg";
+import defaultImage from '../images/default-image.jpg';
 
 export const imageLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
@@ -16,10 +16,10 @@ export const replaceImage = (error) => {
 export const tableCustomStyles = {
   headCells: {
     style: {
-      backgroundColor: "#F3F4F6",
-      color: "#0F172A",
-      "&:hover": {
-        cursor: "pointer",
+      backgroundColor: '#F3F4F6',
+      color: '#0F172A',
+      '&:hover': {
+        cursor: 'pointer',
       },
     },
   },
@@ -39,13 +39,62 @@ export const convertQueryString = (params) => {
   const searchParams = new URLSearchParams(params);
   return searchParams;
 };
+/// Convert Query String
+
+// var title = ['aaa', 'bbb', 'ccc', ];
+
+// var myArrayQry = myArray.map(function(el, idx) {
+//     return 'myArray[' + idx + ']=' + el;
+// }).join('&');
+
+export const arrayTypeQuery = (obj) => {
+  // Function to encode the value for URL
+  const encodeValue = (value) => encodeURIComponent(value);
+
+  // Constructing the query string
+  const queryString = Object.entries(obj)
+    .map(([key, value]) => {
+      if (key === 'sort' || key === 'page' || key === 'limit') {
+        // For 'sort', 'page', and 'limit', construct a single query parameter without 'regex'
+        return `${key}=${encodeValue(value)}`;
+      } else if (Array.isArray(value)) {
+        // If the value is an array, construct multiple query parameters
+        return value.map((v) => `${key}[regex]=${encodeValue(v)}`).join('&');
+      } else if (typeof value === 'object' && value.operators) {
+        // If the value is an object with 'operators' property, construct dynamic parameters
+        const dynamicParams = Object.entries(value.operators)
+          .map(([operator, operand]) => {
+            // Exclude parameters with empty values or where the upper value is zero
+            if (
+              operand === '' ||
+              (operator.toLowerCase().startsWith('lt') && operand == 0)
+            ) {
+              return '';
+            }
+            return `${key}[${operator}]=${encodeValue(operand)}`;
+          })
+          .filter(Boolean)
+          .join('&');
+        return dynamicParams;
+      } else {
+        // For other types, construct a single query parameter
+        return `${key}[regex]=${encodeValue(value)}`;
+      }
+    })
+    .join('&');
+
+  // Constructing the final URL
+  const url = `?${queryString}`;
+
+  return url;
+};
 
 export const cleanObj = (obj) => {
   for (var propName in obj) {
     if (
       obj[propName] === null ||
       obj[propName] === undefined ||
-      obj[propName] === ""
+      obj[propName] === ''
     ) {
       delete obj[propName];
     }
@@ -129,7 +178,7 @@ export const selectThemeColors = (theme) => ({
   borderRadius: 2,
   colors: {
     ...theme.colors,
-    primary: "#0288D1",
+    primary: '#0288D1',
     //neutral30: '#000000', // for input hover border-color
   },
 });
@@ -138,5 +187,5 @@ export const capitalizeAndSpace = (str) => {
   return str
     .split(/(?=[A-Z])/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 };
