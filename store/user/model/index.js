@@ -1,16 +1,17 @@
 export const userBasicInfoModal = {
   _id: null,
-  name: '',
-  email: '',
-  password: '',
-  newPassword: '',
-  confirmPassword: '',
+  name: "",
+  email: "",
+  password: "",
+  newPassword: "",
+  confirmPassword: "",
   isActive: true,
-  image: 'default-user.png',
-  role: { label: 'Admin', value: 'Admin' },
+  image: "http://localhost:8082/uploads/default-user.jpg",
+  photoUrl: "default-user.jpg",
+  role: { label: "Admin", value: "Admin" },
 };
 
 export const userRole = [
-  { label: 'Admin', value: 'Admin' },
-  { label: 'User', value: 'User' },
+  { label: "Admin", value: "Admin" },
+  { label: "User", value: "User" },
 ];

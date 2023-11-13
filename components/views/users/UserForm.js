@@ -1,15 +1,14 @@
-import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import ReactSelect from 'react-select';
-import { API_URL_FILE } from '../../../config';
-import { deleteFile, fileUpload } from '../../../store/file/actions';
-import { addUser, bindUserBasicInfo } from '../../../store/user/actions';
-import { userBasicInfoModal, userRole } from '../../../store/user/model';
-import { replaceImage, selectThemeColors } from '../../../utils/utolity';
-import { useRouter } from 'next/router';
-import { TrashIcon } from '@heroicons/react/24/outline';
-import { confirmDialog } from '../../custom/ConfirmDialogue';
-import { confirmObj } from '../../../utils/enum';
+import { confirmDialog } from "@/components/customs/ConfirmDialogue";
+import { appUrl } from "@/config";
+import { deleteFile, fileUpload } from "@/store/file/actions";
+import { addUser, bindUserBasicInfo } from "@/store/user/actions";
+import { userBasicInfoModal, userRole } from "@/store/user/model";
+import SelectBox from "@/utils/custom/SelectBox";
+import { confirmObj } from "@/utils/enum";
+import { TrashIcon } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserForm = () => {
   const dispatch = useDispatch();
@@ -21,9 +20,9 @@ const UserForm = () => {
     const updatedUser = {
       ...user,
       [name]:
-        type === 'number'
+        type === "number"
           ? Number(value)
-          : type === 'checkbox'
+          : type === "checkbox"
           ? checked
           : value,
     };
@@ -43,7 +42,8 @@ const UserForm = () => {
   const bindPhoto = (fileUrl) => {
     const updatedUser = {
       ...user,
-      image: fileUrl,
+      image: `${appUrl}/uploads/${fileUrl}`,
+      photoUrl: fileUrl,
     };
 
     dispatch(bindUserBasicInfo(updatedUser));
@@ -53,7 +53,7 @@ const UserForm = () => {
     const { files } = event.target;
     const file = files[0];
     let formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     dispatch(fileUpload(formData, bindPhoto));
   };
@@ -61,39 +61,37 @@ const UserForm = () => {
   const handlePhotoDelete = (fileName) => {
     confirmDialog(confirmObj).then(async (e) => {
       if (e.isConfirmed) {
-        dispatch(deleteFile(fileName, 'default-user.png', bindPhoto));
+        dispatch(deleteFile(fileName, "default-user.png", bindPhoto));
       }
     });
   };
 
-  const redirectAfterUserSubmit = (slug) => {
+  const redirectAfterUserSubmit = (id) => {
     router.push({
-      pathname: '/user/[slug]',
-      query: { slug },
+      pathname: "/dashboard/user/[id]",
+      query: { id },
     });
   };
 
   const handleSubmit = () => {
     const submitObj = {
       ...user,
-      role: user.role?.value.toLowerCase() ?? '',
+      role: user.role?.value.toLowerCase() ?? "",
     };
 
     !submitObj?.phoneNumber?.length && delete submitObj.phoneNumber;
 
-    console.log('submitObj', JSON.stringify(submitObj, null, 2));
+    console.log("submitObj", JSON.stringify(submitObj, null, 2));
     dispatch(addUser(submitObj, redirectAfterUserSubmit));
   };
   const handleCancel = () => {
-    router.push('/user');
+    router.push("/dashboard/user");
     dispatch(bindUserBasicInfo(userBasicInfoModal));
   };
   return (
     <>
       <div className="mb-1 flex justify-between border px-5 py-2">
-        <div>
-          <h3 className="font-medium">New User</h3>
-        </div>
+        <div></div>
         <div>
           <button
             className="mr-2 rounded-sm bg-primary py-1 px-4 text-white hover:bg-secondary"
@@ -177,10 +175,9 @@ const UserForm = () => {
                 >
                   Role
                 </label>
-                <ReactSelect
+                <SelectBox
                   id="roleId"
                   instanceId="roleId"
-                  theme={selectThemeColors}
                   name="role"
                   className=" focus:ring-0"
                   isClearable
@@ -223,11 +220,12 @@ const UserForm = () => {
                     Photo
                   </label>
                   <div className="group relative">
-                    <img
+                    <Image
                       className="h-32 w-32 border-2 border-primary"
                       width={128}
                       height={128}
-                      src={`${API_URL_FILE}/${user.image}`}
+                      src={user.image}
+                      alt="Image"
                     />
                     <div className="group absolute bottom-1 left-1 z-10  text-sm font-semibold text-white duration-300 group-hover:bg-secondary/50">
                       <div className=" w-fit bg-white p-1 text-center opacity-0 group-hover:opacity-100">

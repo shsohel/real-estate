@@ -7,7 +7,7 @@ export function middleware(request) {
   const token = request.cookies?.get("token")?.value || "";
   // const { token } = parse(request?.headers?.cookie ?? "");
 
-  if (!token && path !== "/auth/login") {
+  if (!token) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
   return NextResponse.next();

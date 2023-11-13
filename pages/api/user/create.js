@@ -5,7 +5,7 @@ import { baseAxios } from "@/servies";
 export default (req, res) => {
   if (req.method === "POST") {
     baseAxios
-      .post(`/users/new`, req.body, setToken(req))
+      .post(`/users`, req.body, setToken(req))
       .then((response) => {
         res.status(201).json(response.data);
       })

@@ -1,13 +1,12 @@
-/** @format */
+/* eslint-disable import/no-anonymous-default-export */
 
-import { baseAxios, setToken } from "@/servies";
+import { baseAxios } from "@/servies";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default (req, res) => {
   if (req.method === "DELETE") {
     const { id } = req.query;
     baseAxios
-      .delete(`/users/${id}`, setToken(req))
+      .delete(`/fileupload/${id}`)
       .then((response) => {
         res.status(200).json(response.data);
       })
@@ -17,7 +16,7 @@ export default (req, res) => {
   } else if (req.method === "GET") {
     const { id } = req.query;
     baseAxios
-      .get(`/users/${id}`, setToken(req))
+      .get(`/fileupload/${id}`)
       .then((response) => {
         res.status(200).json(response.data);
       })
@@ -26,19 +25,8 @@ export default (req, res) => {
       });
   } else if (req.method === "PUT") {
     const { id } = req.query;
-    console.log("id", id);
     baseAxios
-      .put(`/users/${id}`, req.body, setToken(req))
-      .then((response) => {
-        res.status(200).json(response.data);
-      })
-      .catch(({ response }) => {
-        res.status(400).json(response.data);
-      });
-  } else if (req.method === "PATCH") {
-    const { id } = req.query;
-    baseAxios
-      .put(`/users/update-user-password/${id}`, req.body, setToken(req))
+      .put(`/fileupload/${id}`, req.body)
       .then((response) => {
         res.status(200).json(response.data);
       })

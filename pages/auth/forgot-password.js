@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Logo from '../../components/custom/Logo';
-import { forgotPassword } from '../../store/auth/actions';
-import ProgressLoader from 'components/custom/loader/ProgressLoader';
-import Layout from 'components/Layout';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+// import Logo from "../../components/custom/Logo";
+import ProgressLoader from "components/custom/loader/ProgressLoader";
+import Layout from "components/Layout";
+import { forgotPassword } from "@/store/auth/actions";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const ForgotPassword = () => {
   const responseBack = () => {
     setIsProgressLogin(false);
   };
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleForgotPassword = () => {
     setIsProgressLogin(true);
@@ -28,9 +28,7 @@ const ForgotPassword = () => {
         <div className="container">
           <div className="my-[4.5rem] lg:mt-[9rem]">
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
-              <div className="mx-auto ">
-                <Logo />
-              </div>
+              <div className="mx-auto ">{/* <Logo /> */}</div>
 
               <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="rounded-sm bg-white py-8 px-4 shadow shadow-primary sm:px-10">

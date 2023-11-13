@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import DataTable from "react-data-table-component";
@@ -13,7 +13,7 @@ import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { userBasicInfoModal } from "../../../store/user/model";
 import { API_URL_FILE } from "../../../config";
-import { getUsers } from "@/store/user/actions";
+import { bindUserBasicInfo, deleteUser, getUsers } from "@/store/user/actions";
 import ListLoader from "@/components/customs/ListLoader";
 
 const UserList = (props) => {
@@ -26,14 +26,14 @@ const UserList = (props) => {
   const [sortedBy, setSortedBy] = useState("name");
 
   const { users, total, dataProgress, openUserSidebar } = useSelector(
-    ({ users }) => users
+    ({ users }) => users,
   );
 
   const [filterObj, setFilterObj] = useState({
     name: "",
   });
 
-  const getAllUserCategories = () => {
+  const getAllUserCategories = useCallback(() => {
     dispatch(
       getUsers(
         {
@@ -42,14 +42,14 @@ const UserList = (props) => {
           sort: sortedBy,
           orderBy: orderBy,
         },
-        filterObj
-      )
+        filterObj,
+      ),
     );
-  };
+  }, [dispatch, rowPerPage, currentPage, orderBy, sortedBy, filterObj]);
 
   useEffect(() => {
     getAllUserCategories();
-  }, [dispatch, rowPerPage, currentPage, orderBy, sortedBy, filterObj.name]);
+  }, [dispatch, getAllUserCategories]);
 
   const handleFilterObj = (e) => {
     const { name, value } = e.target;
@@ -76,14 +76,15 @@ const UserList = (props) => {
   };
 
   const handleNew = () => {
-    router.push("/user/new");
+    router.push("/dashboard/user/new");
     dispatch(bindUserBasicInfo(userBasicInfoModal));
   };
 
   const handleEdit = (row) => {
+    console.log(row);
     router.push({
-      pathname: "/user/[slug]",
-      query: { slug: row.slug },
+      pathname: "/dashboard/user/[id]",
+      query: { id: row._id },
     });
   };
 

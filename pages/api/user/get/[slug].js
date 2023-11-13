@@ -1,4 +1,4 @@
-import { baseAxios, setToken } from '../../../../services';
+import { baseAxios, setToken } from "@/servies";
 
 export default (req, res) => {
   if (req.method === 'DELETE') {
