@@ -1,6 +1,6 @@
-import ProgressLoader from '@/components/customs/ProgressLoader';
-import Layouts from '@/components/layout';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import ProgressLoader from "@/components/customs/ProgressLoader";
+import Layouts from "@/components/layout";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   ArrowRightLeftIcon,
   BathIcon,
@@ -10,49 +10,49 @@ import {
   Heart,
   ParkingCircleIcon,
   SquareAsterisk,
-} from 'lucide-react';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { FaChevronRight, FaHome } from 'react-icons/fa';
-import { properties } from '@/data';
-import { CustomTooltip } from '@/components/customs/tooltip';
+} from "lucide-react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { FaChevronRight, FaHome } from "react-icons/fa";
+import { properties } from "@/data";
+import { CustomTooltip } from "@/components/customs/tooltip";
 import {
   getPropertiesByQuery,
   getUserProperties,
-} from '@/store/property/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { appUrl } from '@/config';
-import Input from '@/components/customs/input';
-import { useRouter } from 'next/router';
-import { removeFalsyProperties } from '@/utils/utolity';
-import RangeSlider from '@/components/customs/range-slider';
-import SelectBox from '@/utils/custom/SelectBox';
-import { propertyCategories, propertyTypes } from '@/utils/enum';
+} from "@/store/property/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { appUrl } from "@/config";
+import Input from "@/components/customs/input";
+import { useRouter } from "next/router";
+import { removeFalsyProperties } from "@/utils/utolity";
+import RangeSlider from "@/components/customs/range-slider";
+import SelectBox from "@/utils/custom/SelectBox";
+import { propertyCategories, propertyTypes } from "@/utils/enum";
 const FilterProperty = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [sort, setSort] = useState('propertyType');
+  const [sort, setSort] = useState("propertyType");
   const [page, setPage] = useState(1);
   const [rowPerPage, setRowPerPage] = useState(10);
 
   const [filter, setFilter] = useState({
-    title: '',
-    address: '',
+    title: "",
+    address: "",
     bedRoom: 0,
     bathrooms: 0,
     minPrice: 1,
     maxPrice: 50000,
     minSize: 1,
     maxSize: 50000,
-    customID: '',
+    customID: "",
     propertyType: null,
     category: null,
     page: 1,
     limit: 10,
-    sort: 'category',
+    sort: "category",
   });
   const { allProperties, total } = useSelector(
-    ({ propertyReducers }) => propertyReducers
+    ({ propertyReducers }) => propertyReducers,
   );
   const { isDataProgress } = useSelector(({ basicReducers }) => basicReducers);
 
@@ -71,10 +71,10 @@ const FilterProperty = () => {
     const obj = {
       page: routerQuery?.page ?? 1,
       limit: routerQuery?.limit ?? 10,
-      title: routerQuery?.title,
+      text: routerQuery?.title,
       sort: routerQuery?.sort,
-      propertyType: routerQuery?.propertyType ?? '',
-      category: routerQuery?.category ?? '',
+      propertyType: routerQuery?.propertyType ?? "",
+      category: routerQuery?.category ?? "",
       price: {
         operators: {
           gte: routerQuery?.minPrice ?? 0,
@@ -105,8 +105,8 @@ const FilterProperty = () => {
       maxPrice: filterObt?.maxPrice,
       minSize: filterObt?.minSize,
       maxSize: filterObt?.maxSize,
-      propertyType: filterObt?.propertyType?.label ?? '',
-      category: filterObt?.category?.label ?? '',
+      propertyType: filterObt?.propertyType?.label ?? "",
+      category: filterObt?.category?.label ?? "",
     };
     const finalObject = removeFalsyProperties(obj);
 
@@ -119,7 +119,7 @@ const FilterProperty = () => {
   };
 
   const handleSort = (data) => {
-    setSort(data?.value ?? '');
+    setSort(data?.value ?? "");
   };
   const handleOnChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -127,9 +127,9 @@ const FilterProperty = () => {
     const updatedFilter = {
       ...filter,
       [name]:
-        type === 'number'
+        type === "number"
           ? Number(value)
-          : type === 'checkbox'
+          : type === "checkbox"
           ? checked
           : value,
     };
@@ -234,10 +234,10 @@ const FilterProperty = () => {
                               className="h-56"
                               style={{
                                 backgroundImage: `url(${appUrl}/uploads/${
-                                  product?.images[0] ?? ''
+                                  product?.images[0] ?? ""
                                 })`,
-                                backgroundPosition: 'center center',
-                                backgroundSize: 'cover',
+                                backgroundPosition: "center center",
+                                backgroundSize: "cover",
                               }}
                             ></div>
                             <div className="p-4">

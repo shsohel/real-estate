@@ -1,17 +1,17 @@
 /** @format */
 
-import axios from 'axios';
+import axios from "axios";
 import {
   BIND_PROPERTY_INFO,
   GET_ALL_PROPERTIES_BY_QUERY,
   GET_USER_PROPERTIES,
-} from '../action-types';
-import { propertyModel } from '../models';
-import { dataOnProgress } from '@/store/basic/actions';
-import { notify } from '@/utils/custom/Notification';
-import { confirmDialog } from '@/components/customs/ConfirmDialogue';
-import { confirmObj, status } from '@/utils/enum';
-import moment from 'moment';
+} from "../action-types";
+import { propertyModel } from "../models";
+import { dataOnProgress } from "@/store/basic/actions";
+import { notify } from "@/utils/custom/Notification";
+import { confirmDialog } from "@/components/customs/ConfirmDialogue";
+import { confirmObj, status } from "@/utils/enum";
+import moment from "moment";
 
 export const bindPropertyBasic = (propertyInfo) => (dispatch) => {
   if (propertyInfo) {
@@ -70,18 +70,18 @@ export const getUserPropertyById = (id) => async (dispatch, getState) => {
             : null,
           amenities: propertyModel.amenities.map((am) => {
             if (data.amenities.some((dt) => dt === am.name)) {
-              am['isSelect'] = true;
+              am["isSelect"] = true;
             }
             return am;
           }),
           availableFrom: data?.availableFrom
-            ? moment(data?.availableFrom).format('YYYY-MM-DD')
-            : '',
-          country: '',
-          state: '',
-          city: '',
-          street: '',
-          zipCode: '',
+            ? moment(data?.availableFrom).format("YYYY-MM-DD")
+            : "",
+          country: "",
+          state: "",
+          city: "",
+          street: "",
+          zipCode: "",
         };
 
         dispatch(bindPropertyBasic(obj));
@@ -110,16 +110,16 @@ export const postPoperies = (propertyInfo, callback) => (dispatch) => {
     .then((response) => {
       if (response.status === 201) {
         callback(response.data.data);
-        notify('success', 'The Item  has been created Successfully!');
+        notify("success", "The Item  has been created Successfully!");
       }
     })
     .catch(({ response }) => {
       console.log(response);
       dispatch(dataOnProgress(false));
       if (response?.status === 500) {
-        notify('error', `Please contact the support team!!!`);
+        notify("error", `Please contact the support team!!!`);
       } else if (response?.status === 400) {
-        notify('error', response.data.message);
+        notify("error", response.data.message);
       }
     });
 };
@@ -132,16 +132,16 @@ export const updatePoperies = (propertyInfo, id) => (dispatch) => {
     .then((response) => {
       if (response.status === 200) {
         dispatch(getUserPropertyById(id));
-        notify('success', 'The Item  has been updated Successfully!');
+        notify("success", "The Item  has been updated Successfully!");
       }
     })
     .catch(({ response }) => {
       console.log(response);
       dispatch(dataOnProgress(false));
       if (response?.status === 500) {
-        notify('error', `Please contact the support team!!!`);
+        notify("error", `Please contact the support team!!!`);
       } else if (response?.status === 400) {
-        notify('error', response.data.message);
+        notify("error", response.data.message);
       }
     });
 };
@@ -163,7 +163,7 @@ export const getUserProperties = (queryObj) => (dispatch) => {
       }
     })
     .catch((error) => {
-      notify('Error', 'Please contact the support team');
+      notify("Error", "Please contact the support team");
       dispatch(dataOnProgress(false));
     });
 };
@@ -185,7 +185,7 @@ export const getPropertiesByQuery = (queryObj) => (dispatch) => {
       }
     })
     .catch((error) => {
-      notify('Error', 'Please contact the support team');
+      notify("Error", "Please contact the support team");
       dispatch(dataOnProgress(false));
     });
 };
@@ -202,7 +202,7 @@ export const deleteProperties = (id) => (dispatch, getState) => {
           if (response.status === status.success) {
             const { queryObj } = getState().propertyReducers;
 
-            notify('success', 'The Item  has been deleted Successfully!');
+            notify("success", "The Item  has been deleted Successfully!");
             dispatch(getUserProperties(queryObj));
             dispatch(dataOnProgress(false));
           }
@@ -211,9 +211,9 @@ export const deleteProperties = (id) => (dispatch, getState) => {
           console.log(response);
           dispatch(dataOnProgress(false));
           if (response?.status === 500) {
-            notify('error', `Please contact the support team!!!`);
+            notify("error", `Please contact the support team!!!`);
           } else if (response?.status === 400) {
-            notify('error', response.data.message);
+            notify("error", response.data.message);
           }
         });
     }
