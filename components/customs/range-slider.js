@@ -1,7 +1,7 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useRef } from "react";
 
 const RangeSlider = ({
   initialMin,
@@ -44,13 +44,13 @@ const RangeSlider = ({
   };
 
   useEffect(() => {
-    progressRef.current.style.left = (minValue / max) * step + '%';
-    progressRef.current.style.right = step - (maxValue / max) * step + '%';
+    progressRef.current.style.left = (minValue / max) * step + "%";
+    progressRef.current.style.right = step - (maxValue / max) * step + "%";
   }, [minValue, maxValue, max, step]);
 
-  //   useEffect(() => {
-  //     getRanges(minValue, maxValue);
-  //   }, [minValue, maxValue]);
+  useEffect(() => {
+    setMinValue(initialMin), setMaxValue(initialMax);
+  }, [initialMin, initialMax]);
 
   const onMouseUp = () => {
     getRanges(minValue, maxValue);

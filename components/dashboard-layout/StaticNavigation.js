@@ -1,12 +1,12 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
-import UserDropdown from './UserDropdown';
-import { Search } from 'lucide-react';
-import Logo from '../customs/Logo';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import UserDropdown from "./UserDropdown";
+import { Search } from "lucide-react";
+import Logo from "../customs/Logo";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 const StaticNavigation = (props) => {
   const { mainNavigation } = props;
@@ -15,7 +15,9 @@ const StaticNavigation = (props) => {
     <div>
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-white  lg:pb-4">
         <div className="flex h-14 items-center bg-white  px-6">
-          <Logo />
+          <Link href="/">
+            <Logo />
+          </Link>
         </div>
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="mt-6 flex h-0 flex-1 flex-col overflow-y-auto">
@@ -62,18 +64,18 @@ const StaticNavigation = (props) => {
                       href={item.href}
                       className={classNames(
                         router.pathname === item.href
-                          ? 'bg-primary text-white'
-                          : 'hover:border-primary text-gray-700 hover:border-r hover:bg-gray-50 hover:text-gray-900',
-                        'group flex items-center rounded px-2 py-2 text-sm font-medium'
+                          ? "bg-primary text-white"
+                          : "hover:border-primary text-gray-700 hover:border-r hover:bg-gray-50 hover:text-gray-900",
+                        "group flex items-center rounded px-2 py-2 text-sm font-medium",
                       )}
-                      aria-current={item.current ? 'page' : undefined}
+                      aria-current={item.current ? "page" : undefined}
                     >
                       <item.icon
                         className={classNames(
                           router.pathname === item.href
-                            ? 'bg-primary text-white'
-                            : 'text-primary group-hover:text-gray-500',
-                          'mr-3 h-6 w-6 flex-shrink-0'
+                            ? "bg-primary text-white"
+                            : "text-primary group-hover:text-gray-500",
+                          "mr-3 h-6 w-6 flex-shrink-0",
                         )}
                         aria-hidden="true"
                       />

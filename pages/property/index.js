@@ -24,10 +24,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { appUrl } from "@/config";
 import Input from "@/components/customs/input";
 import { useRouter } from "next/router";
-import { removeFalsyProperties } from "@/utils/utolity";
+import { removeFalsyProperties, replaceImage } from "@/utils/utolity";
 import RangeSlider from "@/components/customs/range-slider";
 import SelectBox from "@/utils/custom/SelectBox";
 import { propertyCategories, propertyTypes } from "@/utils/enum";
+import Image from "next/image";
 const FilterProperty = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -38,7 +39,7 @@ const FilterProperty = () => {
   const [filter, setFilter] = useState({
     title: "",
     address: "",
-    bedRoom: 0,
+    bedRooms: 0,
     bathrooms: 0,
     minPrice: 1,
     maxPrice: 50000,
@@ -57,24 +58,22 @@ const FilterProperty = () => {
   const { isDataProgress } = useSelector(({ basicReducers }) => basicReducers);
 
   const routerQuery = router.query;
-
-  console.log(router);
+  console.log("routerQuery", JSON.stringify(routerQuery, null, 2));
+  console.log("filter", JSON.stringify(filter.maxSize, null, 2));
 
   useEffect(() => {
-    // const queryObj = {
-    //   sort,
-    //   page,
-    //   limit: rowPerPage,
-    //   title: filter.title,
-    //   address: filter.address,
-    // };
     const obj = {
       page: routerQuery?.page ?? 1,
       limit: routerQuery?.limit ?? 10,
-      text: routerQuery?.title,
+      title: routerQuery?.title,
       sort: routerQuery?.sort,
       propertyType: routerQuery?.propertyType ?? "",
       category: routerQuery?.category ?? "",
+      // bedRooms: {
+      //   operators: {
+      //     gte: routerQuery?.bedRoom ?? 0,
+      //   },
+      // },
       price: {
         operators: {
           gte: routerQuery?.minPrice ?? 0,
@@ -88,6 +87,32 @@ const FilterProperty = () => {
         },
       },
     };
+    setFilter({
+      ...routerQuery,
+      title: routerQuery?.title ? routerQuery?.title : "",
+      address: routerQuery?.address ? routerQuery?.address : "",
+      propertyType: routerQuery?.propertyType
+        ? {
+            value: routerQuery?.propertyType,
+            label: routerQuery?.propertyType,
+          }
+        : "",
+      category: routerQuery?.category
+        ? {
+            value: routerQuery?.category,
+            label: routerQuery?.category,
+          }
+        : "",
+      page: routerQuery?.page ? Number(routerQuery?.page) : 1,
+      limit: routerQuery?.limit ? Number(routerQuery?.limit) : 10,
+      sort: routerQuery?.sort ? routerQuery?.sort : "category",
+      bathrooms: routerQuery?.bedRoom ? Number(routerQuery?.bathrooms) : 0,
+      bedRooms: routerQuery?.bedRoom ? Number(routerQuery?.bedRoom) : 0,
+      minSize: routerQuery?.minSize ? Number(routerQuery?.minSize) : 1,
+      maxSize: routerQuery?.maxSize ? Number(routerQuery?.maxSize) : 50000,
+      minPrice: routerQuery?.minPrice ? Number(routerQuery?.minPrice) : 1,
+      maxPrice: routerQuery?.maxPrice ? Number(routerQuery?.maxPrice) : 50000,
+    });
     const finalObject = removeFalsyProperties(obj);
 
     dispatch(getPropertiesByQuery(finalObject));
@@ -156,8 +181,6 @@ const FilterProperty = () => {
     setFilter(updatedFilter);
   };
 
-  console.log(allProperties);
-
   const handleDropdownOnChange = (data, e) => {
     const { name } = e;
     const updatedFilter = {
@@ -168,9 +191,10 @@ const FilterProperty = () => {
     setFilter(updatedFilter);
   };
 
+  console.log(isDataProgress);
   return (
     <Layouts isFromAnother={true}>
-      <ProgressLoader isProgress={false}>
+      <>
         <div className="container">
           <div className="pt-28">
             {/* Breadcrumbs */}
@@ -228,18 +252,25 @@ const FilterProperty = () => {
                         key={index}
                         className="animate__animated animate__zoomIn"
                       >
-                        <Card className="w-auto text-dark">
-                          <CardContent className="p-0">
+                        <div className="w-auto text-dark border">
+                          <div>
                             <div
-                              className="h-56"
-                              style={{
-                                backgroundImage: `url(${appUrl}/uploads/${
-                                  product?.images[0] ?? ""
-                                })`,
-                                backgroundPosition: "center center",
-                                backgroundSize: "cover",
-                              }}
-                            ></div>
+
+                            // style={{
+                            //   backgroundImage: `url(${appUrl}/uploads/${product?.images})`,
+                            //   backgroundPosition: "center center",
+                            //   backgroundSize: "cover",
+                            // }}
+                            >
+                              <Image
+                                className="h-full w-full"
+                                height={600}
+                                width={300}
+                                src={`${appUrl}/uploads/${product?.images}`}
+                                alt="Hell"
+                                onError={(error) => replaceImage(error)}
+                              />
+                            </div>
                             <div className="p-4">
                               <h2 className="card-title fs-16 lh-2 mb-0">
                                 <a
@@ -253,7 +284,7 @@ const FilterProperty = () => {
                                 {product.address}
                               </p>
                               <ul className=" flex mb-0 flex-wrap mr-n5">
-                                <li className="text-gray-400 text-sm font-medium  flex items-center mr-5">
+                                <li className="text-gray-400 text-sm font-medium  flex flex-wrap items-center gap-2">
                                   <span className="text-primary">
                                     <BedDoubleIcon className="w-5" />
                                   </span>
@@ -274,26 +305,11 @@ const FilterProperty = () => {
                                     <DiamondIcon className="w-5" />
                                   </span>
                                   <span>{`${product.rooms} R`}</span>
-
-                                  {/* <span className="text-primary mr-2">
-                                        {attr.name === 'Bed' ? (
-                                          <BedDoubleIcon className="w-5" />
-                                        ) : attr.name === 'Bathroom' ? (
-                                          <BathIcon className="w-5" />
-                                        ) : attr.name === 'Square Feet' ? (
-                                          <SquareAsterisk className="w-5" />
-                                        ) : attr.name === 'Garage' ? (
-                                          <ParkingCircleIcon className="w-5" />
-                                        ) : (
-                                          <DiamondIcon className="w-5" />
-                                        )}
-                                      </span>
-                                      <span>{`${attr.value} ${attr.shortCode}`}</span> */}
                                 </li>
                               </ul>
                             </div>
-                          </CardContent>
-                          <CardFooter className="flex justify-between border-t p-2">
+                          </div>
+                          <div className="flex justify-between border-t p-2">
                             <p className="text-base font-bold text-dark mb-0">
                               {`$ ${product.price.toFixed(2)}`}
                             </p>
@@ -309,8 +325,8 @@ const FilterProperty = () => {
                                 </div>
                               </CustomTooltip>
                             </div>
-                          </CardFooter>
-                        </Card>
+                          </div>
+                        </div>
                       </div>
                     );
                   })}
@@ -390,7 +406,7 @@ const FilterProperty = () => {
             </div>
           </div>
         </div>
-      </ProgressLoader>
+      </>
     </Layouts>
   );
 };

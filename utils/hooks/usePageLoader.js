@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export const usePageLoader = () => {
   const router = useRouter();
@@ -7,21 +7,21 @@ export const usePageLoader = () => {
 
   useEffect(() => {
     const routeEventStart = () => {
-      setIsPageLoading(true);
+      router.pathname !== "/property" && setIsPageLoading(true);
     };
     const routeEventEnd = () => {
       setIsPageLoading(false);
     };
 
-    router.events.on('routeChangeStart', routeEventStart);
-    router.events.on('routeChangeComplete', routeEventEnd);
-    router.events.on('routeChangeError', routeEventEnd);
+    router.events.on("routeChangeStart", routeEventStart);
+    router.events.on("routeChangeComplete", routeEventEnd);
+    router.events.on("routeChangeError", routeEventEnd);
     return () => {
-      router.events.off('routeChangeStart', routeEventStart);
-      router.events.off('routeChangeComplete', routeEventEnd);
-      router.events.off('routeChangeError', routeEventEnd);
+      router.events.off("routeChangeStart", routeEventStart);
+      router.events.off("routeChangeComplete", routeEventEnd);
+      router.events.off("routeChangeError", routeEventEnd);
     };
-  }, []);
+  }, [router]);
 
   return { isPageLoading };
 };

@@ -11,7 +11,7 @@ export const capitalizeFirstLetter = (string) => {
 };
 
 export const replaceImage = (error) => {
-  error.target.src = defaultImage;
+  error.target.srcset = defaultImage?.src;
 };
 export const tableCustomStyles = {
   headCells: {
@@ -96,7 +96,7 @@ export const arrayTypeQuery = (obj) => {
         return dynamicParams;
       } else {
         // For other types, construct a single query parameter
-        return `${key}[search]=${encodeValue(value)}`;
+        return `${key}[regex]=${encodeValue(value)}&${key}[options]=i`;
       }
     })
     .join("&");

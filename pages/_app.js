@@ -1,13 +1,13 @@
-import '@/styles/globals.css';
-import { ThemeProvider } from 'next-theme';
-import 'animate.css';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store } from '@/store';
-import { persistStore } from 'redux-persist';
-import { usePageLoader } from '@/utils/hooks/usePageLoader';
-import ProgressLoader from '@/components/customs/ProgressLoader';
-import { ToastContainer } from 'react-toastify';
+import "@/styles/globals.css";
+import { ThemeProvider } from "next-theme";
+import "animate.css";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store } from "@/store";
+import { persistStore } from "redux-persist";
+import { usePageLoader } from "@/utils/hooks/usePageLoader";
+import ProgressLoader from "@/components/customs/ProgressLoader";
+import { ToastContainer } from "react-toastify";
 const persistor = persistStore(store);
 
 export default function App({ Component, pageProps }) {
